@@ -1,0 +1,9 @@
+Name                                :	Ridwanul Hafiz
+Job Title                           :	Senior Developer (Frontend)
+Department                          :	Frontend
+Job Experience                      :	3 years
+Technical Skills                    :	HTML5, CSS3, Javascript, PHP, NodeJs, Vue Js, MySql, Elastic Search, Redis, Cassandra, Laravel(5.2, 5.4)
+Job Responsibility                  :	Developing different modules and features of web application
+Hire Date                           :	2nd March, 2016
+Official Email                      :	ridwan@mssit.io
+Official Cell                       :	01991126416
