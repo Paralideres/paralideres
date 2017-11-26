@@ -1,0 +1,49 @@
+// ===========================
+// Error Page
+// ===========================
+import NotFound from '../components/error/404.vue'
+// ===========================
+// Authentication Page
+// ===========================
+import Default from '../components/authPath/default.vue'
+import SignIn from '../components/authPath/singIn.vue'
+import SignUp from '../components/authPath/singUp.vue'
+import SingUpSuccess from '../components/authPath/singUpSuccess.vue'
+import ResendActivation from '../components/authPath/resend-activation.vue'
+import ActivePhone from '../components/authPath/active-phone.vue'
+import ActiveEmail from '../components/authPath/active-email.vue'
+import Forgot from '../components/authPath/forgot.vue'
+import PasswordResetPhone from '../components/authPath/password-reset-phone.vue'
+import PasswordResetEmail from '../components/authPath/password-reset-email.vue'
+import SecureLogin from '../components/authPath/secureLogin.vue'
+// ===========================
+// News Feed Page
+// ===========================
+import Home from '../components/packages/home/home.vue'
+
+
+export const routes = [
+    // ===========================
+    // Error Routes
+    // ===========================
+    {path: '*', component: NotFound},
+    // ===========================
+    // Authentication Routes
+    // ===========================
+    {path: '/', component: Default},
+    {path: '/signIn', component: SignIn},
+    {path: '/signup', component: SignUp},
+    {path: '/signup/success', component: SingUpSuccess},
+    {path: '/resend/activation', component: ResendActivation},
+    {path: '/active/email/:token', component: ActiveEmail},
+    {path: '/active/phone', component: ActivePhone},
+    {path: '/forgot/password', component: Forgot},
+    {path: '/password-reset/:token', component: PasswordResetEmail},
+    {path: '/password-reset-phone', component: PasswordResetPhone},
+    {path: '/secure/login', component: SecureLogin},
+    // {path: '/change/confirm/:type/:key', component: SecureLogin},
+    // ===========================
+    // News Feed Routes
+    // ===========================
+    {path: '/home',component: Home}
+];
