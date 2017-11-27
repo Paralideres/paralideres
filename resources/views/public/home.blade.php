@@ -207,7 +207,7 @@
                                     <br>
                                     <div v-if="pollResult">
                                         <label v-if="poll_option.votes">Total Vote : <span v-text="poll_option.votes.total"></span></label>
-                                        <label v-else>Total Vote : 0</label>
+                                        {{--<label v-else>Total Vote : 0</label>--}}
                                     </div>
                                 </div>
                             </li>

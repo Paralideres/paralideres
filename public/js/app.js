@@ -10637,27 +10637,48 @@ return jQuery;
 /* 2 */
 /***/ (function(module, exports) {
 
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
+var g;
+
+
+
+// This works in non-strict mode
+
+g = (function() {
+
+	return this;
+
+})();
+
+
+
+try {
+
+	// This works if eval is allowed (see CSP)
+
+	g = g || Function("return this")() || (1,eval)("this");
+
+} catch(e) {
+
+	// This works if the window reference is available
+
+	if(typeof window === "object")
+
+		g = window;
+
+}
+
+
+
+// g can still be undefined, but nothing to do about it...
+
+// We return undefined, instead of nothing here, so it's
+
+// easier to handle this case. if(!global) { ...}
+
+
+
+module.exports = g;
+
 
 
 /***/ }),
@@ -28423,28 +28444,50 @@ if (token) {
 /* 14 */
 /***/ (function(module, exports) {
 
-module.exports = function(module) {
-	if(!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if(!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
+module.exports = function(module) {
+
+	if(!module.webpackPolyfill) {
+
+		module.deprecate = function() {};
+
+		module.paths = [];
+
+		// module.parent = undefined by default
+
+		if(!module.children) module.children = [];
+
+		Object.defineProperty(module, "loaded", {
+
+			enumerable: true,
+
+			get: function() {
+
+				return module.l;
+
+			}
+
+		});
+
+		Object.defineProperty(module, "id", {
+
+			enumerable: true,
+
+			get: function() {
+
+				return module.i;
+
+			}
+
+		});
+
+		module.webpackPolyfill = 1;
+
+	}
+
+	return module;
+
+};
+
 
 
 /***/ }),
@@ -39647,10 +39690,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-/**
-* jquery-match-height 0.7.0 by @liabru
-* http://brm.io/jquery-match-height/
-* License: MIT
+/**
+
+* jquery-match-height 0.7.0 by @liabru
+
+* http://brm.io/jquery-match-height/
+
+* License: MIT
+
 */
 
 ;(function (factory) {
@@ -39671,16 +39718,21 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         factory(jQuery);
     }
 })(function ($) {
-    /*
-    *  internal
+    /*
+
+    *  internal
+
     */
 
     var _previousResizeWidth = -1,
         _updateTimeout = -1;
 
-    /*
-    *  _parse
-    *  value parse utility function
+    /*
+
+    *  _parse
+
+    *  value parse utility function
+
     */
 
     var _parse = function _parse(value) {
@@ -39688,10 +39740,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         return parseFloat(value) || 0;
     };
 
-    /*
-    *  _rows
-    *  utility function returns array of jQuery selections representing each row
-    *  (as displayed after float wrapping applied by browser)
+    /*
+
+    *  _rows
+
+    *  utility function returns array of jQuery selections representing each row
+
+    *  (as displayed after float wrapping applied by browser)
+
     */
 
     var _rows = function _rows(elements) {
@@ -39726,9 +39782,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         return rows;
     };
 
-    /*
-    *  _parseOptions
-    *  handle plugin options
+    /*
+
+    *  _parseOptions
+
+    *  handle plugin options
+
     */
 
     var _parseOptions = function _parseOptions(options) {
@@ -39752,9 +39811,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         return opts;
     };
 
-    /*
-    *  matchHeight
-    *  plugin definition
+    /*
+
+    *  matchHeight
+
+    *  plugin definition
+
     */
 
     var matchHeight = $.fn.matchHeight = function (options) {
@@ -39793,8 +39855,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         return this;
     };
 
-    /*
-    *  plugin global options
+    /*
+
+    *  plugin global options
+
     */
 
     matchHeight.version = '0.7.0';
@@ -39807,9 +39871,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     matchHeight._parse = _parse;
     matchHeight._parseOptions = _parseOptions;
 
-    /*
-    *  matchHeight._apply
-    *  apply matchHeight to given elements
+    /*
+
+    *  matchHeight._apply
+
+    *  apply matchHeight to given elements
+
     */
 
     matchHeight._apply = function (elements, options) {
@@ -39951,9 +40018,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         return this;
     };
 
-    /*
-    *  matchHeight._applyDataApi
-    *  applies matchHeight to all elements with a data-match-height attribute
+    /*
+
+    *  matchHeight._applyDataApi
+
+    *  applies matchHeight to all elements with a data-match-height attribute
+
     */
 
     matchHeight._applyDataApi = function () {
@@ -39977,9 +40047,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         });
     };
 
-    /*
-    *  matchHeight._update
-    *  updates matchHeight on all current groups with their correct options
+    /*
+
+    *  matchHeight._update
+
+    *  updates matchHeight on all current groups with their correct options
+
     */
 
     var _update = function _update(event) {
@@ -40019,8 +40092,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         }
     };
 
-    /*
-    *  bind events
+    /*
+
+    *  bind events
+
     */
 
     // apply on DOM ready event
@@ -40042,10 +40117,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /***/ (function(module, exports) {
 
 $(document).ready(function () {
-    /*
-     =========================================================================================
-     12. SLIDE
-     =========================================================================================
+    /*
+
+     =========================================================================================
+
+     12. SLIDE
+
+     =========================================================================================
+
      */
 
     // var banner_slider = $("#banner_slider");
@@ -51085,7 +51164,11 @@ $(document).ready(function () {
                 api_url: window.api_url,
                 formData: null,
                 submitDisable: false,
-                errors: []
+                errors: [],
+                passcheck : {
+                    error : false,
+                    msg : ''
+                }
             },
 
             created: function created() {},
@@ -51126,48 +51209,67 @@ $(document).ready(function () {
                 },
                 login: function login(form_id, _login) {
                     var _this2 = this;
-
-                    this.formData = $('#' + form_id).serialize();
-                    // this.formData += '&grant_type='+this.grant_type+'&client_id='+this.client_id+'&client_secret='+this.client_secret+'&scope=';
-                    if (_login) {
-                        this.$common.loadingShow(0);
-                        this.submitDisable = true;
-                        this.formData += '&login=login';
-                    }
-                    // axios.post('oauth/token',this.formData).then(response => {
-                    // axios.post(this.api_url+'account/login',this.formData).then(response => {
-                    axios.post(this.base_url + 'login', this.formData).then(function (response) {
-                        _this2.$common.loadingHide(0);
-                        _this2.errors = [];
-                        _this2.submitDisable = false;
-                        if (response.data) {
-                            _this2.$common.showMessage(response.data);
-                            localStorage.setItem('access_token', response.data.data.access_token);
-                            // alert(window.redirect);
-                            if (window.redirect == 'home') {
-                                var url = _this2.base_url;
-                            } else if (window.redirect == 'resource') {
-                                var url = _this2.base_url + 'recursos/' + window.slug;
-                            } else if (window.redirect == 'resource_list') {
-                                var url = _this2.base_url + 'recursos';
-                            } else {
-                                url = _this2.base_url;
+                    var password = $('#' + form_id).find('input[name="password"]').val();
+                    if(password.length > 0){
+                        this.formData = $('#' + form_id).serialize();
+                        // this.formData += '&grant_type='+this.grant_type+'&client_id='+this.client_id+'&client_secret='+this.client_secret+'&scope=';
+                        if (_login) {
+                            this.$common.loadingShow(0);
+                            this.submitDisable = true;
+                            this.formData += '&login=login';
+                        }
+                        // axios.post('oauth/token',this.formData).then(response => {
+                        // axios.post(this.api_url+'account/login',this.formData).then(response => {
+                        axios.post(this.base_url + 'login', this.formData).then(function (response) {
+                            _this2.$common.loadingHide(0);
+                            _this2.errors = [];
+                            _this2.submitDisable = false;
+                            if (response.data) {
+                                _this2.$common.showMessage(response.data);
+                                localStorage.setItem('access_token', response.data.data.access_token);
+                                // alert(window.redirect);
+                                if (window.redirect == 'home') {
+                                    var url = _this2.base_url;
+                                } else if (window.redirect == 'resource') {
+                                    var url = _this2.base_url + 'recursos/' + window.slug;
+                                } else if (window.redirect == 'resource_list') {
+                                    var url = _this2.base_url + 'recursos';
+                                } else {
+                                    url = _this2.base_url;
+                                }
+                                setTimeout(function () {
+                                    window.location.href = url;
+                                }, 500);
                             }
-                            setTimeout(function () {
-                                window.location.href = url;
-                            }, 500);
-                        }
-                    }).catch(function (error) {
-                        _this2.$common.loadingHide(0);
-                        _this2.errors = [];
-                        _this2.submitDisable = true;
-                        if (error.response.status == 500 && error.response.data.code == 500) {
-                            var error = error.response.data;
-                            _this2.$common.showMessage(error);
-                        } else if (error.response.status == 422) {
-                            _this2.errors = error.response.data.errors;
-                        }
-                    });
+                        }).catch(function (error) {
+                            _this2.$common.loadingHide(0);
+                            _this2.errors = [];
+                            _this2.submitDisable = true;
+                            if (error.response.status == 500 && error.response.data.code == 500) {
+                                var error = error.response.data;
+                                _this2.$common.showMessage(error);
+                                console.log('here');
+                            } else if (error.response.status == 422) {
+                                _this2.errors = error.response.data.errors;
+                                if(error.response.data.errors.password != undefined){
+                                    _this2.passcheck.msg = error.response.data.errors.password[0];
+                                    _this2.passcheck.error = true;
+                                }
+                            }
+                        });
+                    }
+
+                },
+                checkPass: function checkPass(trigger){
+                    var trigger = $(trigger.target);
+                    var password = trigger.val();
+                    if(password.length > 0 && password.length < 8){
+                        this.passcheck.msg = 'Password length must be greater than 7 character';
+                        this.passcheck.error = true;
+                    } else {
+                        this.passcheck.msg = '';
+                        this.passcheck.error = false;
+                    }
                 },
                 logout: function logout() {
                     var _this3 = this;

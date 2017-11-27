@@ -21,13 +21,13 @@
                     <input type="text" name="email" v-on:keyup="login('login_form','')" placeholder="USUARIO">
                     <span v-if="errors.email" class="has-error" v-text="errors.email[0]"></span>
                 </div>
-                <div class="input_content" :class="{'has-error':errors.password}">
+                <div class="input_content" :class="{'has-error':passcheck.error}">
                     <label>CONTRASEÑA</label>
-                    <input type="password"  name="password" v-on:keyup="login('login_form','')" placeholder="CONTRASEÑA">
-                    <span v-if="errors.password" class="has-error" v-text="errors.password[0]"></span>
+                    <input type="password" v-on:keyup="checkPass" name="password" placeholder="CONTRASEÑA">
+                    <span v-if="passcheck.error" class="has-error" v-text="passcheck.msg"></span>
                 </div>
                 <p><a href="{{url('/password-reset')}}">Olvide mi contrasena</a></p>
-                <button type="submit" :disabled="submitDisable">Ingresar</button>
+                <button type="submit">Ingresar</button>
                 <span>No tengo cuenta en Paralideres.org, <a href="{{url('/registrarme')}}">Registrarme</a></span>
 
             </form>
