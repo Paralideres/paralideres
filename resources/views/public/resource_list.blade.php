@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('content')
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-559b5a0c386679ae" async="async"></script>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-559b5a0c386679ae" async="async"></script>
 
 <?php 
 $tag_slug=(isset($_GET['tag']))?$_GET['tag']:'';

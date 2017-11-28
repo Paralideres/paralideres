@@ -827,14 +827,14 @@ Link    : http://sciactive.com/pnotify/
 =======================================================================
 [Table of contents]
 =========================================================================
-01. COMMON STYLES 
-02. HEADER 
-03. NAV 
-04. WELCOME SECTION 
+01. COMMON STYLES
+02. HEADER
+03. NAV
+04. WELCOME SECTION
 */
 
 /*---------------------------------------
-COMMON STYLES             
+COMMON STYLES
 -----------------------------------------*/
 
 *{
@@ -2398,7 +2398,6 @@ a:hover, a:focus {
     background: #f9f9f9;
     padding: 20px 0px;
     margin: 0;
-    margin-bottom: 30px;
     padding-left: 20px;
 }
 .login_content.create_resourse {
@@ -2462,7 +2461,16 @@ a:hover, a:focus {
     padding-bottom: 0px;
 }
 .login_inner{
-    padding: 0px 50px 50px;
+	padding: 20px;
+	display: inline-block;
+	width: 100%;
+	height: calc(100vh - 130px);
+	overflow: auto;
+}
+@media(max-width:390px){
+    .login_inner{
+        height: calc(100vh - 200px);
+    }
 }
 @media(max-width: 767px){
     .create_resourse .input_content label {
@@ -2500,9 +2508,6 @@ a:hover, a:focus {
     }
     .resource_2 ,.resource_1{
         margin-top: 20px;
-    }
-    .login_inner {
-        padding: 0px 15px 50px;
     }
 }
 
@@ -3307,11 +3312,11 @@ span.has-error{
 .footer_area a{
     color: #fff;
 }
-@media(max-width:767px){
+/*@media(max-width:767px){
     .step_1, .step_2, .step_3 {
     height: 400px;
     overflow: scroll;
-}
+}*/
 .navbar-brand>img {
     display: block;
     width: 120px;
@@ -3319,7 +3324,7 @@ span.has-error{
 }
 .home_login {
     top: 9px;
-}    
+}
 #login_form span.has-error {
     margin-top: 0px!important;
     padding-left: 0!important;
@@ -3363,7 +3368,7 @@ span.has-error {
 }
 .login_content {
     margin-bottom: 0px;
-    margin: 100px auto;
+    margin: 30px auto;
 }
 .recurso_header .navbar-brand>img {
     margin-left: 15px;
@@ -3450,7 +3455,7 @@ span.has-error {
 @media(max-width:390px){
  .service_inner {
     min-height: 350px;
-}   
+}
 }
 
 .new_tag{
@@ -3463,7 +3468,7 @@ span.has-error {
 .input_content input {
     border: 1px solid #A9A9A9;
 }
-@media all and (max-width: 1199px) and (min-width: 991px) { 
+@media all and (max-width: 1199px) and (min-width: 991px) {
       .service_inner {
           min-height: 355px;
       }
@@ -3503,4 +3508,18 @@ span.has-error {
 	display: table;
 	text-align: left;
 	padding: 5px 0!important;
+}
+
+
+
+.addthis_toolbox li a .at-icon-wrapper{
+	float: inherit;
+	position: inherit;
+	top: inherit;
+	right: inherit;
+	border-radius: 0;
+	overflow: inherit;
+	padding: 0;
+	margin-right: 5px;
+	display: inline-block;
 }

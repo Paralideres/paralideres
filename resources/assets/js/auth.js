@@ -15,7 +15,7 @@ $(document).ready(function () {
                 errors: []
             },
 
-            created(){
+            created: function(){
 
             },
 
