@@ -2875,8 +2875,11 @@ span.cat-10{
     padding: 0;
 }
 .upload_file_wrapper{
-    padding: 0px 30px;
+    padding: 0;
     margin-bottom: 30px;
+	display: inline-block;
+	width: 100%;
+	text-align: center;
 }
 .upload-btn-wrapper {
     position: relative;
@@ -2909,9 +2912,7 @@ span.cat-10{
     width: 100%;
 }
 .upload_file{
-    width: 48%;
-    float: left;
-    margin-right: 2%;
+	display: inline-block;
 }
 .upload_text{
     width: 48%;
@@ -3387,10 +3388,7 @@ span.has-error {
     float: left;
 }
 .upload_file {
-    width: 100%;
-    float: left;
-    margin-right: 0;
-    height: auto;
+	display: inline-block;
 }
 .upload_text {
     width: 100%;
