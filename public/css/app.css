@@ -3471,3 +3471,39 @@ span.has-error {
           min-height: 355px;
       }
     }
+
+
+
+/*======================================*/
+/* Side bar Poll Style Sheer*/
+/*======================================*/
+#votePollSideBar{
+	width: 100%;
+	display: table;
+	padding: 20px 0;
+}
+#votePollSideBar .option_inner{
+	width: 100%;
+	display: table;
+}
+#votePollSideBar .option_inner .title{
+	width: 100%;
+	display: table;
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	font-size: 18px;
+}
+#votePollSideBar .option_inner ul{
+	width: 100%;
+	display: table;
+	margin: 0;
+	padding: 10px 0;
+
+}
+#votePollSideBar .option_inner ul li{
+	width: 100%;
+	display: table;
+	text-align: left;
+	padding: 5px 0!important;
+}

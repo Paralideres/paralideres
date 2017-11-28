@@ -1,31 +1,1 @@
-/**
- * Created by Tarek on 10/20/2017.
- */
-
-new Vue({
-    el: '#app',
-    data:{
-        asset: window.asset,
-        base_url: window.base_url,
-        api_url: window.api_url,
-        userLike: userLike,
-    },
-
-
-    methods: {
-
-        givenResourceLike(resource_id){
-            axios.post(this.base_url+this.api_url+'resources/'+resource_id+'/like')
-                .then(response => {
-                    if(response.data.status == 'like'){
-                        this.userLike = true;
-                    }else if(response.data.status == 'unlike'){
-                        this.userLike = false;
-                    }
-                });
-        },
-
-
-    }
-
-});
+new Vue({    el: '#app',    data:{        asset: window.asset,        base_url: window.base_url,        api_url: window.api_url,        userLike: userLike,        poll:[],        pollResult:false    },    methods: {        givenResourceLike(resource_id){            axios.post(this.base_url+this.api_url+'resources/'+resource_id+'/like')                .then(response => {                    if(response.data.status == 'like'){                        this.userLike = true;                    }else if(response.data.status == 'unlike'){                        this.userLike = false;                    }                });        },        getLastPoll(){            axios.get(this.asset+this.api_url+'polls/last').then(response => {                this.poll = response.data.data;            });        },        votePoll(){            let formID = document.querySelector('#votePollSideBar');            let formData = new FormData(formID);            this.$common.loadingShow(0);            axios.post(this.base_url+this.api_url+'polls/'+this.poll.id+'/vote', {                'option': formData.get('poll_option')            })                .then(response => {                this.$common.loadingHide(0);            this.pollResult = true;            this.poll = response.data.data;            this.$common.showMessage(response.data);            console.log(this.pollResult, response.data.data);        })        .catch(error => {                this.$common.loadingHide(0);            if (error.response.status == 500 && error.response.data.code == 500) {                this.$common.showMessage(error);            }        });        },    },    created(){        this.getLastPoll();    }});
