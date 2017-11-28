@@ -22,7 +22,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script>
-        window.asset = '{{env("APP_URL")}}/public/';
+        window.asset = '{{env("APP_URL")}}/';
         window.base_url = '{{env("APP_URL")}}/';
         window.api_url = 'api/v1/';
     </script>

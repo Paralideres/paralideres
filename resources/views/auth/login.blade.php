@@ -29,7 +29,6 @@
                 <p><a href="{{url('/password-reset')}}">Olvide mi contrasena</a></p>
                 <button type="submit">Ingresar</button>
                 <span>No tengo cuenta en Paralideres.org, <a href="{{url('/registrarme')}}">Registrarme</a></span>
-
             </form>
         </div>
     </div>

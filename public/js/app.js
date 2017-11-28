@@ -51258,7 +51258,6 @@ $(document).ready(function () {
                             }
                         });
                     }
-
                 },
                 checkPass: function checkPass(trigger){
                     var trigger = $(trigger.target);
