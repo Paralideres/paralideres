@@ -7,61 +7,55 @@ new Vue({
     data:{
         asset: window.asset,
         base_url: window.base_url,
+        img_path: window.img_path,
         api_url: window.api_url,
         resources: [],
     },
-
-    created(){
+    created: function(){
         this.getResources();
     },
-
     filters: {
         truncate: function (string, value) {
             return string.substring(0, value) + '...';
         }
     },
-
     methods: {
-
-        getResources(){
-            this.$common.loadingShow(0);
-            axios.get(this.api_url+'resources?'+search_text+tag_slug+cat_slug)
-                .then(response => {
-                    this.resources = response.data.data;
-                    this.$common.loadingHide(0);
-                    // console.log(response);
-                    // console.log(this.resources);
+        getResources: function(){
+            var THIS = this;
+            THIS.$common.loadingShow(0);
+            axios.get(THIS.api_url+'resources?'+search_text+tag_slug+cat_slug)
+                .then(function (response) {
+                    THIS.resources = response.data.data;
+                    THIS.$common.loadingHide(0);
                 });
         },
-
-        getNextResources(next_page_url){
-            this.$common.loadingShow(0);
+        getNextResources: function(next_page_url){
+            var THIS = this;
+            THIS.$common.loadingShow(0);
             axios.get(next_page_url)
-            .then(response => {
-                this.resources = response.data.data;
-                this.$common.loadingHide(0);
-                // console.log(response);
-                // console.log(this.resources);
+            .then(function(){
+                THIS.resources = response.data.data;
+                THIS.$common.loadingHide(0);
             });
             $('html, body').animate({
                 scrollTop: 0
             }, 500);
         },
 
-        filterResource(){
+        filterResource: function(){
+            var THIS = this;
             var formData = $('#filterResource').serialize();
             console.log(formData);
-            axios.get(this.api_url+'resources?'+formData)
-            .then(response => {
-                this.resources = response.data.data;
-                // console.log(response);
-                // console.log(this.resources);
+            axios.get(THIS.api_url+'resources?'+formData)
+            .then(function () {
+                THIS.resources = response.data.data;
             });
         },
 
-        givenResourceLike(resource){
-            axios.post(this.api_url+'resources/'+resource.id+'/like')
-                .then(response => {
+        givenResourceLike: function(resource){
+            var THIS = this;
+            axios.post(THIS.api_url+'resources/'+resource.id+'/like')
+                .then(function () {
                     if(response.data.status == 'like'){
                         if(resource.likes_count.length > 0){
                             resource.likes_count[0].total +=1;

@@ -58,7 +58,7 @@ export default function (Vue) {
     });
 
     Vue.common = {
-        showMessage(data,delayTime=2000){
+        showMessage: function(data,delayTime){
             new PNotify({
                 title: data.title,
                 text: data.message,
@@ -70,7 +70,7 @@ export default function (Vue) {
             });
         },
 
-        loadingShow(id=0){
+        loadingShow: function(id){
             if(id !=0){
                 $(id).LoadingOverlay("show",{color:"rgba(0, 0, 0, 0)"});
             }else{
@@ -80,7 +80,7 @@ export default function (Vue) {
         },
 
 
-        loadingHide(id=0){
+        loadingHide: function(id){
             if(id !=0){
                 $(id).LoadingOverlay("hide",{color:"rgba(0, 0, 0, 0)"});
             }else{
@@ -92,7 +92,7 @@ export default function (Vue) {
 
     Object.defineProperties(Vue.prototype, {
         $common:{
-            get(){
+            get: function(){
                 return Vue.common;
             }
         }

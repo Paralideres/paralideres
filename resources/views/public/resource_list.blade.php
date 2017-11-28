@@ -48,8 +48,8 @@ $cat_slug=(isset($_GET['category']))?$_GET['category']:'';
                 <div class="service_inner">
                     <div class="service_head">
                         <h2>
-                            <img v-if="resource_info.category && (resource_info.category.id == 9 || resource_info.category.id == 11 || resource_info.category.id == 12)" :src="asset+'images/icon/cat-icon-12.png'" alt="">
-                            <img v-else-if="resource_info.category" :src="asset+'images/icon/cat-icon-'+resource_info.category.id+'.png'" alt="">
+                            <img v-if="resource_info.category && (resource_info.category.id == 9 || resource_info.category.id == 11 || resource_info.category.id == 12)" :src="img_path+'/images/icon/cat-icon-12.png'" alt="">
+                            <img v-else-if="resource_info.category" :src="img_path+'/images/icon/cat-icon-'+resource_info.category.id+'.png'" alt="">
                             <span v-if="resource_info.category" v-text="resource_info.category.label"></span>
                         </h2>
                     </div>
@@ -57,8 +57,8 @@ $cat_slug=(isset($_GET['category']))?$_GET['category']:'';
                     <p>@{{ resource_info.review | truncate(200) }}</p>
                     <div class="author">
                         <h3>
-                            <img width="45px" class="img-circle" v-if="resource_info.user.image" :src="asset+'uploads/'+resource_info.user.image" alt="">
-                            <img width="45px" class="img-circle" v-else :src="asset+'images/user.png'" alt="">
+                            <img width="45px" class="img-circle" v-if="resource_info.user.image" :src="img_path+'/uploads/'+resource_info.user.image" alt="">
+                            <img width="45px" class="img-circle" v-else :src="img_path+'/images/user.png'" alt="">
                             author: <span v-text="resource_info.user.fullname || resource_info.user.username"></span>
                         </h3>
                     </div>
@@ -66,10 +66,10 @@ $cat_slug=(isset($_GET['category']))?$_GET['category']:'';
                         <span>
                             <div class="dropdown">
                               <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
-                                  <img :src="asset+'images/share.png'" alt="">
+                                  <img :src="img_path+'/images/share.png'" alt="">
                               </button>
                               <ul class="dropdown-menu addthis_toolbox">
-                                <li><a  class="addthis_button_email" style="margin-left: 0px">Goolge</a></li>
+                                <li><a  class="addthis_button_email" style="margin-left: 0px">Email</a></li>
                                 <li><a  class="addthis_button_facebook" style="margin-left: 0px">Facebook</a></li>
                                 <li><a  class="addthis_button_twitter" style="margin-left: 0px">Twitter</a></li>
                               </ul>
@@ -79,8 +79,8 @@ $cat_slug=(isset($_GET['category']))?$_GET['category']:'';
                         <span style="cursor: pointer" @if($auth) v-on:click.prevent="givenResourceLike(resource_info)" @else onclick="window.location.href='ingreser?redirect=resource_list'" @endif>
                             <span v-if="resource_info.likes_count.length > 0" v-text="resource_info.likes_count[0].total"></span>
                             <span v-else>0</span>
-                            <img v-if="resource_info.like.length > 0" :src="asset+'images/love3.png'" alt="">
-                            <img v-else :src="asset+'images/love.jpg'" alt="">
+                            <img v-if="resource_info.like.length > 0" :src="img_path+'/images/love3.png'" alt="">
+                            <img v-else :src="img_path+'/images/love.jpg'" alt="">
                         </span>
                     </div>
                 </div>

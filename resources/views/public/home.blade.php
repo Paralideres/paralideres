@@ -30,7 +30,7 @@
                             <div class="col-sm-3">
                                 <button type="submit" :disabled="submitDisable" class="btn btn-dm form_hide_m">REGISTRARME</button>
                             </div>
-                            <button type="submit" class="btn btn-dm m_submit"><img src="{{asset('images/submit-arrow.png')}}" alt=""></button>
+                            <button type="submit" class="btn btn-dm m_submit"><img :src="img_path+'/images/submit-arrow.png'" alt=""></button>
                         </form>
                         @endif
                     </div>
@@ -107,8 +107,8 @@
                 <div class="service_inner">
                     <div class="service_head">
                         <h2>
-                            <img v-if="resource_info.category && (resource_info.category.id == 9 || resource_info.category.id == 11 || resource_info.category.id == 12)" :src="asset+'images/icon/cat-icon-12.png'" alt="">
-                            <img v-else-if="resource_info.category" :src="asset+'images/icon/cat-icon-'+resource_info.category.id+'.png'" alt="">
+                            <img v-if="resource_info.category && (resource_info.category.id == 9 || resource_info.category.id == 11 || resource_info.category.id == 12)" :src="img_path+'/images/icon/cat-icon-12.png'" alt="">
+                            <img v-else-if="resource_info.category" :src="img_path+'/images/icon/cat-icon-'+resource_info.category.id+'.png'" alt="">
                             <span><a :href="base_url+'recursos?category='+resource_info.category.slug" v-text="resource_info.category.label"></a></span>
                         </h2>
                     </div>
@@ -117,17 +117,17 @@
                     <div class="author">
                         <h3>
                             <img width="45px" class="img-circle" v-if="resource_info.user.image" :src="asset+'uploads/'+resource_info.user.image" alt="">
-                            <img width="45px" class="img-circle" v-else :src="asset+'images/user.png'" alt="">
+                            <img width="45px" class="img-circle" v-else :src="img_path+'/images/user.png'" alt="">
                             author: <span v-text="resource_info.user.fullname || resource_info.user.username"></span>
                         </h3>
                     </div>
                     <div class="comment">
-                        <span><a :href="base_url+'recursos/'+resource_info.slug"><img :src="asset+'images/download.jpg'" alt="">ver/yo descargar discurso</a></span>
+                        <span><a :href="base_url+'recursos/'+resource_info.slug"><img :src="img_path+'/images/download.jpg'" alt="">ver/yo descargar discurso</a></span>
                         <span style="cursor: pointer" @if($auth) v-on:click.prevent="givenResourceLike(resource_info)" @else onclick="window.location.href='ingreser'" @endif>
                             <span v-if="resource_info.likes_count.length > 0" v-text="resource_info.likes_count[0].total"></span>
                             <span v-else>0</span>
-                            <img v-if="resource_info.like.length > 0" :src="asset+'images/love3.png'" alt="">
-                            <img v-else :src="asset+'images/love.jpg'" alt="">
+                            <img v-if="resource_info.like.length > 0" :src="img_path+'/images/love3.png'" alt="">
+                            <img v-else :src="img_path+'/images/love.jpg'" alt="">
                         </span>
                     </div>
                 </div>
@@ -156,13 +156,13 @@
                 <div class="col-md-4 no-padding" v-for="(resource_info, index) in resources.data">
                     <div class="service_inner_m">
                         <span>
-                            <img v-if="resource_info.category && (resource_info.category.id == 9 || resource_info.category.id == 11 || resource_info.category.id == 12)" :src="asset+'images/icon/cat-icon-12.png'" alt="">
-                            <img v-else-if="resource_info.category" :src="asset+'images/icon/cat-icon-'+resource_info.category.id+'.png'" alt="">
+                            <img v-if="resource_info.category && (resource_info.category.id == 9 || resource_info.category.id == 11 || resource_info.category.id == 12)" :src="img_path+'/images/icon/cat-icon-12.png'" alt="">
+                            <img v-else-if="resource_info.category" :src="img_path+'/images/icon/cat-icon-'+resource_info.category.id+'.png'" alt="">
                         </span>
                         <h4><a :href="base_url+'recursos/'+resource_info.slug">@{{ resource_info.title}}</a></h4>
                         <h3 v-if="resource_info.user.fullname" v-text="'author : '+resource_info.user.fullname"></h3>
                         <h3 v-if="!resource_info.user.fullname" v-text="'author : '+resource_info.user.username"></h3>
-                        <a :href="base_url+'recursos/'+resource_info.slug"><img :src="asset+'images/download2.png'" alt=""></a>
+                        <a :href="base_url+'recursos/'+resource_info.slug"><img :src="img_path+'/images/download2.png'" alt=""></a>
                     </div>
                 </div>
                 <div class="col-md-12 clearfix text-center">
