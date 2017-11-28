@@ -118,7 +118,7 @@
                         <h3>
                             <img width="45px" class="img-circle" v-if="resource_info.user.image" :src="asset+'uploads/'+resource_info.user.image" alt="">
                             <img width="45px" class="img-circle" v-else :src="asset+'images/user.png'" alt="">
-                            author: <span v-text="resource_info.user.fullname"></span>
+                            author: <span v-text="resource_info.user.fullname || resource_info.user.username"></span>
                         </h3>
                     </div>
                     <div class="comment">
@@ -160,8 +160,8 @@
                             <img v-else-if="resource_info.category" :src="asset+'images/icon/cat-icon-'+resource_info.category.id+'.png'" alt="">
                         </span>
                         <h4><a :href="base_url+'recursos/'+resource_info.slug">@{{ resource_info.title}}</a></h4>
-                        <h3 v-if="resource_info.user.fullname" v-text="'author: '+resource_info.user.fullname"></h3>
-                        <h3 v-else>author:</h3>
+                        <h3 v-if="resource_info.user.fullname" v-text="'author : '+resource_info.user.fullname"></h3>
+                        <h3 v-if="!resource_info.user.fullname" v-text="'author : '+resource_info.user.username"></h3>
                         <a :href="base_url+'recursos/'+resource_info.slug"><img :src="asset+'images/download2.png'" alt=""></a>
                     </div>
                 </div>
