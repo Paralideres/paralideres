@@ -20,6 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('former_pwd')->nullable();
             $table->integer('former_id')->unsigned()->nullable();
             $table->rememberToken();
+            $table->string('is_active')->default(0);
+            $table->string('activation_token');
             $table->timestamps();
         });
     }

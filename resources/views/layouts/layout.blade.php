@@ -129,16 +129,22 @@
                             <div class="upload_file_wrapper clearfix">
                                 <div class="upload_file" v-on:click="option1">
                                     <div class="upload-btn-wrapper">
-                                        <img src="{{asset('images/file-up-img.jpg')}}" alt="">
+                                        <img src="{{asset('images/file-up-img-2.png')}}" alt="">
                                         <p>CLICK PARA SUBIR TU ARCHIVO</p>
                                     </div>
                                 </div>
-                                <div class="upload_text" v-on:click="option2">
+                                <div class="upload_file" v-on:click="option2">
+                                    <div class="upload-btn-wrapper">
+                                        <img src="{{asset('images/file-up-img.png')}}" alt="">
+                                        <p>CLICK PARA CREAR UN RECURSO</p>
+                                    </div>
+                                </div>
+                                {{--<div class="upload_text" v-on:click="option2">
                                     <div class="upload_text_inner">
                                         <img src="{{asset('images/file-up-img-2.jpg')}}" alt="">
                                         <p>CLICK PARA SUBIR TU ARCHIVO</p>
                                     </div>
-                                </div>
+                                </div>--}}
                             </div>
                         </div>
                         <span class="up_left_span"><a href="#" v-on:click.prevent="back1">VOLVER AL PASO ANTERIOR</a></span>
