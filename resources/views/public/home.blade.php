@@ -13,17 +13,17 @@
                         <h2>Hey Lider! Descubre lo nuevo de Paralideres!</h2>
                         <p class="form_hide_m">REGISTRATE Y RECIBE EN TU EMAIL LAS INSTRUCCIONES</p>
                         @if(!$auth)
-                        <form id="signup_form" v-on:submit.prevent="signup('signup_form','signup')">
+                        <form id="signup_form" v-on:submit.prevent="signup('signup_form')">
                             <div class="col-sm-3" :class="{'has-error':errors.email}">
-                                <input type="email" class="form-control" name="email" v-on:keyup="signup('signup_form','')" placeholder="Ingresa tu email">
-                                <span v-if="errors.email" class="has-error" v-text="errors.email[0]"></span>ver/yo descargar discurso
+                                <input type="email" class="form-control" name="email" placeholder="Ingresa tu email">
+                                <span v-if="errors.email" class="has-error" v-text="errors.email[0]"></span>
                             </div>
                             <div class="col-sm-3" :class="{'has-error':errors.password}">
-                                <input type="password" class="form-control" name="password" v-on:keyup="signup('signup_form','')" placeholder="Ingresa una clave">
+                                <input type="password" class="form-control" name="password" placeholder="Ingresa una clave">
                                 <span v-if="errors.password" class="has-error" v-text="errors.password[0]"></span>
                             </div>
                             <div class="col-sm-3" :class="{'has-error':errors.password_confirmation}">
-                                <input type="password" class="form-control" name="password_confirmation" v-on:keyup="signup('signup_form','')" placeholder="Confirma tu clave">
+                                <input type="password" class="form-control" name="password_confirmation" placeholder="Confirma tu clave">
                                 <span v-if="errors.password_confirmation" class="has-error" v-text="errors.password_confirmation[0]"></span>
                             </div>
 
@@ -198,7 +198,6 @@
                 <form id="votePoll">
                 <div class="col-md-12">
                     <div class="option_inner">
-                        <span v-text="poll"></span>
                         <h3 v-text="poll.question"></h3>
                         <ul>
                             <li v-for="(poll_option, index) in poll.options">

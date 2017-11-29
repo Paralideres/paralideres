@@ -16,6 +16,7 @@ Route::prefix('/')->namespace('Web')->group(function(){
 
     // show the page page
     Route::get('/', 'HomeController@index');
+    Route::get('/account/activation/{token}', 'HomeController@activation');
 
     // resource list
     Route::get('/recursos', 'ResourceController@index');

@@ -129,6 +129,7 @@ Route::resource('collections', 'Api\V1\CollectionController');
 // Tags
 Route::resource('tags', 'Api\V1\TagController@index');
 Route::post('tags/create', 'Api\V1\ExtraController@create');
+Route::post('user/register', 'Api\V1\ExtraController@signup');
 
 // Polls
 Route::group(['prefix' => 'polls', 'namespace' => 'Api\V1'], function() {

@@ -11,21 +11,27 @@
     <div class="login_content" id="auth">
         <h2>Registrarme a Paralideres.org</h2>
         <div class="login_inner clearfix">
-            <form id="signup_form" v-on:submit.prevent="signup('signup_form','signup')">
+            <form id="signup_form" v-on:submit.prevent="signup('signup_form')">
                 <div class="input_content clearfix" :class="{'has-error':errors.email}">
                     <label>USUARIO</label>
-                    <input type="text" name="email" v-on:keyup="signup('signup_form','')" placeholder="Ingresa tu email">
-                    <span v-if="errors.email" class="has-error" v-text="errors.email[0]"></span>
+                    <input type="text" name="email" placeholder="Ingresa tu email" class="noMargin">
+                    <p class="custom-err-msg">
+                        <span v-if="errors.email" v-text="errors.email[0]"></span>
+                    </p>
                 </div>
                 <div class="input_content" :class="{'has-error':errors.password}">
                     <label>CONTRASEÑA</label>
-                    <input type="password" name="password" v-on:keyup="signup('signup_form','')" placeholder="Ingresa una clave">
-                    <span v-if="errors.password" class="has-error" v-text="errors.password[0]"></span>
+                    <input type="password" name="password" placeholder="Ingresa una clave" class="noMargin">
+                    <p class="custom-err-msg">
+                        <span v-if="errors.password" v-text="errors.password[0]"></span>
+                    </p>
                 </div>
                 <div class="input_content" :class="{'has-error':errors.password_confirmation}">
                     <label>CONTRASEÑA</label>
-                    <input type="password" name="password_confirmation" v-on:keyup="signup('signup_form','')" placeholder="Confirma tu clave">
-                    <span v-if="errors.password_confirmation" class="has-error" v-text="errors.password_confirmation[0]"></span>
+                    <input type="password" name="password_confirmation" placeholder="Confirma tu clave">
+                    <p class="custom-err-msg">
+                        <span v-if="errors.password_confirmation" class="has-error" v-text="errors.password_confirmation[0]"></span>
+                    </p>
                 </div>
                 <p><a href="{{url('/password-reset')}}">Olvide mi contrasena</a></p>
                 <button type="submit" :disabled="submitDisable">Registrarme</button>

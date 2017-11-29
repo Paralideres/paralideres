@@ -123,7 +123,7 @@ class PollController extends Controller
             $rv = array(
                 "status" => 3000,
                 "poll" => $poll,
-                "has" => $hasVoted->poll_id
+                "has" => $hasVoted->poll_options_id
             );
              return $this->setResponse($rv, 'done', 'OK', '200', 'Vota el éxito', 'Gracias! Tu voto ha sido enviado');
         }

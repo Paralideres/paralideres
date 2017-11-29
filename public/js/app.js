@@ -51177,35 +51177,22 @@ $(document).ready(function () {
 
 
             methods: {
-                signup: function signup(form_id, _signup) {
-                    var _this = this;
-
-                    this.formData = $('#' + form_id).serialize();
-                    if (_signup) {
-                        this.$common.loadingShow(0);
-                        this.submitDisable = true;
-                        this.formData += '&signup=home_signup';
-                    }
-
-                    axios.post(this.base_url + this.api_url + 'users', this.formData).then(function (response) {
-                        _this.$common.loadingHide(0);
-                        _this.errors = [];
-                        _this.submitDisable = false;
-                        if (response.data) {
-                            _this.$common.showMessage(response.data);
+                signup: function signup(form_id) {
+                    var THIS = this;
+                    THIS.formData = $('#' + form_id).serialize();
+                    THIS.$common.loadingShow(0);
+                    axios.post(THIS.base_url + THIS.api_url + 'user/register', this.formData).then(function (response) {
+                        THIS.$common.loadingHide(0);
+                        THIS.errors = [];
+                        THIS.submitDisable = false;
+                        var res = response.data;
+                        console.log(res);
+                        if(res.status === 2000){
                             setTimeout(function () {
                                 window.location.href = '/ingreser';
                             }, 500);
-                        }
-                    }).catch(function (error) {
-                        _this.$common.loadingHide(0);
-                        _this.errors = [];
-                        _this.submitDisable = true;
-                        if (error.response.status == 500 && error.response.data.code == 500) {
-                            var error = error.response.data;
-                            _this.$common.showMessage(error);
-                        } else if (error.response.status == 422) {
-                            _this.errors = error.response.data.errors;
+                        } else {
+                            THIS.errors = res.data;
                         }
                     });
                 },
