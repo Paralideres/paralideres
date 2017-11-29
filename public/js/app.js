@@ -35360,7 +35360,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                     return message;
                 },
                 noResults: function noResults() {
-                    return 'No results found';
+                    return 'Add this custom tag';
                 },
                 searching: function searching() {
                     return 'Searching…';
@@ -40190,12 +40190,12 @@ $(document).ready(function () {
 
     $(".open_login").click(function () {
         $(".popup_content").addClass("open_content");
-        $('body').css({'overflow' : 'hidden'});
+        $('body').addClass('bodyScroll');
     });
     $(".cross_ic").click(function () {
         $(".popup_content").removeClass("open_content");
         $(".step_1 ,.step_2 ,.step_3, .step_4").hide();
-        $('body').css({'overflow' : 'inherit'});
+        $('body').removeClass('bodyScroll');
     });
     $(".open_login").click(function () {
         return false;

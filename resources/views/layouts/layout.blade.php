@@ -20,6 +20,7 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="https://selectize.github.io/selectize.js/js/selectize.js"></script>
     <![endif]-->
     <script>
         window.asset = '{{env("APP_URL")}}/';
@@ -76,17 +77,21 @@
 
                         <div class="input_content clearfix" :class="{'has-error':errors1.title}">
                             <label>TITULO RECURSO</label>
-                            <input type="text" name="title" id="input_text" placeholder="Escribe algo aquí..." style="margin-bottom: 40px!important;">
-                            <span v-if="errors1.title" class="has-error" v-text="errors1.title[0]"></span>
+                            <input type="text" name="title" id="input_text" placeholder="Escribe algo aquí..." class="noMargin">
+                            <p class="custom-err-msg">
+                                <span v-if="errors1.title" v-text="errors1.title[0]"></span>
+                            </p>
                         </div>
                         <div class="input_content clearfix" :class="{'has-error':errors1.review}">
                             <label>RESEÑA O RESUME</label>
-                            <textarea name="review" id="" cols="30" rows="10" placeholder=""></textarea>
-                            <span v-if="errors1.review" class="has-error" v-text="errors1.review[0]"></span>
+                            <textarea name="review" id="" cols="30" rows="10" class="noMargin"></textarea>
+                            <p class="custom-err-msg">
+                                <span v-if="errors1.review" v-text="errors1.review[0]"></span>
+                            </p>
                         </div>
                         <div class="input_content clearfix" :class="{'has-error':errors1.category_id}">
                             <label>CATEGORIA</label>
-                            <select name="category_id">
+                            <select name="category_id" class="noMargin">
                             <option value="">...SELECT CATEGORIA...</option>
                             @if(isset($popup_categories))
                             @foreach($popup_categories as $category)
@@ -94,10 +99,13 @@
                             @endforeach
                             @endif
                             </select>
-                            <span v-if="errors1.category_id" class="has-error" v-text="errors1.category_id[0]"></span>
+                            <p class="custom-err-msg">
+                                <span v-if="errors1.category_id" v-text="errors1.category_id[0]"></span>
+                            </p>
                         </div>
                         <div class="input_content clearfix" id="old_tag">
                             <label>ETIQUETAS</label>
+                            {{--{{$popup_tags}}--}}
                             <select id="select2" multiple name="tag_ids[]">
                                 <option value="">...SELECT ETIQUETAS...</option>
                                 @if(isset($popup_tags))

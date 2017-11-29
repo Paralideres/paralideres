@@ -3419,7 +3419,7 @@ span.has-error {
    outline:0;
 }
 .resource_2, .resource_1 {
-    margin-top: 0px;
+    margin-top: 0;
 }
 .final_step {
     padding-left: 0;
@@ -3522,4 +3522,34 @@ span.has-error {
 	padding: 0;
 	margin-right: 5px;
 	display: inline-block;
+}
+
+.bodyScroll{
+	overflow: hidden;
+}
+
+
+.noMargin{
+	margin: 0!important;
+}
+.custom-err-msg{
+	width: 100%;
+	display: inline-block!important;
+	text-align: right;
+	margin-bottom: 15px;
+	font-size: 12px!important;
+	color: #d71410!important;
+	padding: 0!important;
+}
+.custom-err-msg span{
+	width: 100%;
+	display: inline-block!important;
+	text-align: right;
+	font-size: 12px!important;
+	color: #d71410!important;
+	padding: 0!important;
+}
+/*select2-search__field*/
+.select2-results__message{
+	cursor: pointer;
 }
