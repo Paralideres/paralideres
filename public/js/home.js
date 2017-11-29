@@ -7,6 +7,7 @@ $(document).ready(function () {
             img_path: window.img_path,
             api_url: window.api_url,
             resources: [],
+            checkedAnswer: 0,
             poll: [],
             pollResult: false
         },
@@ -105,11 +106,19 @@ $(document).ready(function () {
                 axios.post(THIS.base_url + THIS.api_url + 'polls/' + THIS.poll.id + '/vote', {
                     'option': formData.get('poll_option')
                 }).then(function (response) {
-                    THIS.$common.loadingHide(0);
-                    THIS.pollResult = true;
-                    THIS.poll = response.data.data;
-                    THIS.$common.showMessage(response.data);
-                    console.log(THIS.pollResult, response.data.data);
+                    if(response.data.data.status === 2000){
+                        THIS.$common.loadingHide(0);
+                        THIS.pollResult = true;
+                        THIS.poll = response.data.data.poll;
+                        THIS.$common.showMessage(response.data);
+                        THIS.checkedAnswer = formData.get('poll_option');
+                    } else if(response.data.data.status === 3000){
+                        THIS.$common.loadingHide(0);
+                        THIS.pollResult = true;
+                        THIS.poll = response.data.data.poll;
+                        THIS.$common.showMessage(response.data);
+                        THIS.checkedAnswer = response.data.data.has;
+                    }
                 }).catch(function (response) {
                     this.$common.loadingHide(0);
                     if (error.response.status == 500 && error.response.data.code == 500) {

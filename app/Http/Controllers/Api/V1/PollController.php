@@ -41,7 +41,7 @@ class PollController extends Controller
         return response()->json(Poll::with('options')->findOrFail($id), 200);
     }
 
-    public function last()
+    public function last(Request $request)
     {
         $monthStart = new Carbon('first day of this month');
         $monthEnd = new Carbon('last day of this month');
@@ -114,13 +114,18 @@ class PollController extends Controller
 
         $hasVoted = Auth::user()->pollVote()->where([
             'poll_id' => $id,
-            'poll_options_id' => $request->option
+//            'poll_options_id' => $request->option
         ])->first();
 
         if ($hasVoted) {
             $poll = Poll::with('options.votes', 'options.votes.user')->findOrFail($id);
             //return $this->setResponse($poll, 'warning', 'OK', '200', 'Warning!', 'Only one vote per user per poll');
-             return $this->setResponse($poll, 'success', 'OK', '200', 'Vota el éxito', 'Gracias! Tu voto ha sido enviado');
+            $rv = array(
+                "status" => 3000,
+                "poll" => $poll,
+                "has" => $hasVoted->poll_id
+            );
+             return $this->setResponse($rv, 'done', 'OK', '200', 'Vota el éxito', 'Gracias! Tu voto ha sido enviado');
         }
 
         $pollVote = new PollVote([
@@ -130,7 +135,11 @@ class PollController extends Controller
 
         Auth::user()->pollVote()->save($pollVote);
         $poll = Poll::with('options.votes', 'options.votes.user')->findOrFail($id);
-        return $this->setResponse($poll, 'success', 'OK', '200', 'Vota el éxito', 'Gracias! Tu voto ha sido enviado');
+        $rv = array(
+            "status" => 3000,
+            "poll" => $poll
+        );
+        return $this->setResponse($rv, 'success', 'OK', '200', 'Vota el éxito', 'Gracias! Tu voto ha sido enviado');
     }
 
     public function result($id) {

@@ -198,11 +198,12 @@
                 <form id="votePoll">
                 <div class="col-md-12">
                     <div class="option_inner">
+                        <span v-text="poll"></span>
                         <h3 v-text="poll.question"></h3>
                         <ul>
                             <li v-for="(poll_option, index) in poll.options">
                                 <div class="step_menu">
-                                    <input type="radio" name="poll_option" :checked="index == 0" :value="poll_option.id" :id="index+1"  />
+                                    <input type="radio" name="poll_option" :checked="checkedAnswer > 0 && checkedAnswer == poll_option.id" :value="poll_option.id" :id="index+1"  />
                                     <label :for="index+1"><span v-text="poll_option.option"></span></label>
                                     <br>
                                     <div v-if="pollResult">
