@@ -9,10 +9,26 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 
 
 
 class ExtraController {
+
+    public function testMail(Request $request){
+        $data = array(
+            'token' => md5(uniqid())
+        );
+        $email = 'ridwanul.hafiz@gmail.com';
+        $subject = 'Account Activation';
+        Mail::send('emails.activation', $data, function($message) use($email, $subject) {
+            $message->to($email)->subject($subject);
+        });
+        $rv = array(
+            "status" => 2000
+        );
+        return json_encode($rv, true);
+    }
 
     public function create(Request $request)
     {
@@ -54,7 +70,8 @@ class ExtraController {
                     )
                 );
                 return json_encode($rv, true);
-            } else {
+            }
+            else {
 
                 $email = $input['email'];
                 $password = bcrypt($input['password_confirmation']);
@@ -74,25 +91,12 @@ class ExtraController {
                     $to = $email;
                     $subject = "paralideres : Account Activation";
 
-                    $message = '<html>
-                                    <head>
-                                    <title>Paralideres : Activation Token</title>
-                                    </head>
-                                    <body>
-                                    <p>
-                                    To activate your account please click on the below link or copy and paste the url to your 
-                                    browser and activate your account
-                                    </p>
-                                    <br><br>
-                                    <p><a href="'.env('APP_URL').'/account/activation/'.$activation_token.'"></a></p>
-                                    
-                                    </body>
-                                    </html>';
-                    $headers = "MIME-Version: 1.0" . "\r\n";
-                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                    $headers .= 'From: no-reply.paralideres@gmail.com' . "\r\n";
-
-                    $mail = mail($to,$subject,$message,$headers);
+                    $data = array(
+                        'token' => $activation_token
+                    );
+                    Mail::send('emails.activation', $data, function($message) use($email, $subject) {
+                        $message->to($email)->subject($subject);
+                    });
 
                     $rv = array(
                         "status" => 2000,
@@ -113,20 +117,6 @@ class ExtraController {
                 }
 
             }
-
-
-
         }
-        dd($validator->fails(), $validator->messages());
-        $tag = new Tag();
-        $tag->label = $input['tag'];
-        $tag->slug = str_replace(' ', '_', $input['tag']);
-        $tag->created_at = Carbon::now();
-        $tag->save();
-        $rv = array(
-            "status" => 2000,
-            "tag" => $tag->toArray()
-        );
-        return json_encode($rv, true);
     }
 }
