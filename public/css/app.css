@@ -882,7 +882,7 @@ a:hover, a:focus {
 .nav>li>a {
     position: relative;
     display: block;
-    padding: 10px 40px;
+    padding: 8px 40px;
     font-size: 20px;
     color: #fff!important;
     font-family: 'Fira Sans';
@@ -929,7 +929,9 @@ a:hover, a:focus {
     color: #54b1c4;
     border-radius: 5px;
 }
-.home_login a{}
+.home_login a {
+    padding: 3px 20px;
+}
 .navbar-brand {
     float: left;
     height: auto;
@@ -1027,13 +1029,22 @@ a:hover, a:focus {
     display: block;
     width: auto!important;
 }
-
-@media (min-width: 768px){
+@media (min-width: 992px){
     .navbar-nav {
         float: left;
         margin: 0;
         padding-right: 160px;
     }
+}
+@media (max-width: 991px){
+    .navbar-nav {
+        padding-right: 90px;
+    }
+    .nav li:last-child a {
+	    padding: 7px 20px;
+	}
+}
+@media (min-width: 768px){
     .m_submit{
         display: none;
     }
@@ -1082,14 +1093,14 @@ a:hover, a:focus {
         display: block;
     }
     .m_submit img{}
-    .m_submit {
-        position: absolute;
-        right: 15px;
-        top: 0;
-        width: 100px!important;
-        height: 50px!important;
-        background: #c2c6c8!important;
-    }
+	.m_submit {
+	    position: relative;
+	    width: 100px!important;
+	    height: 50px!important;
+	    background: #c2c6c8!important;
+	    display: block;
+	    margin: 0px 15px;
+	}
     .banner_inner form input, .banner_inner form input:hover, .banner_inner form input:focus {
         background: #fff;
         border: 0;
@@ -1101,12 +1112,21 @@ a:hover, a:focus {
         height: 50px;
     }
     .banner_inner h2 {
-        font-size: 35px;
-        color: #ffffff;
-        font-weight: 200;
-        margin-bottom: 34px;
+	    font-size: 24px;
+	    color: #ffffff;
+	    font-weight: 200;
+	    margin-bottom: 15px;
     }
-
+    .navbar-nav {
+	    padding-right: 0;
+	}
+	.banner_wrapper {
+	    padding: 8px 0px 44px;
+	}
+	.owl-carousel .owl-item img {
+	    display: block;
+	    width: 44px!important;
+}
 }
 
 /*---------------------------------------
@@ -1192,6 +1212,17 @@ a:hover, a:focus {
     }
     .cat_left span:nth-of-type(4){
         background: #2bcb80;
+    }
+}
+@media(max-width: 610px){
+    .cat_left span {
+        color: #fff!important;
+        width: 48%;
+        float: left;
+        padding: 13px 0px;
+        text-align: center;
+        margin: 26px 1% -4px;
+        font-weight: normal;
     }
 }
 /*---------------------------------------
@@ -2195,6 +2226,12 @@ a:hover, a:focus {
         display: inline-block;
         margin: 48px 0px 24px;
     }
+    .author_contect_inner{
+	    padding: 20px;
+	}
+	.author_contect {
+	    padding: 15px;
+	}
 }
 
 
@@ -2370,6 +2407,11 @@ a:hover, a:focus {
 }
 .recurso_filter span.recurso_btn button{}
 
+@media(max-width: 1199px){
+	.recurso_filter span input {
+	    width: 116px;
+	}
+}
 /*****************************************
      CREATE RESOURCE  PAGE
 ******************************************/
@@ -2514,13 +2556,34 @@ a:hover, a:focus {
 @media(max-width: 991px){
     .recurso_filter span {
         display: block;
+        width: 290px;
+    }
+    .recurso_filter span select{
+    	float: right;
     }
     .recurso_filter span.recurso_btn {
         float: left;
         padding-right: 0;
+        width: 290px;
     }
+    .recurso_filter span.recurso_btn input{
+        float: right;
+    }
+    .recurso_filter {
+	    margin: 30px 0px 47px;
+	}
+	.recurso_filter span input {
+	    width: 155px;
+	}
+	.recurso_filter span.recurso_btn button {
+	    position: absolute;
+	    left: 13px;
+	    bottom: -29px;
+	}
+	.recurso_filter span:not(.num) {
+		margin-bottom: 20px;
+	}
 }
-
 /*new css*/
 
 .author_head span .dropdown {
@@ -2616,22 +2679,7 @@ a:hover, a:focus {
 .option_head h2 {
     font-weight: 100;
 }
-.nav li:last-child a {
-    position: relative;
-    display: block;
-    padding: 7px 40px;
-    font-size: 20px;
-    color: #fff!important;
-    background: #54b1c4;
-    border: 1px solid #54b1c4;
-    border-radius: 5px;
-}
-.nav li:last-child a:hover {
-    background: #2e353e;
-    border: 1px solid #54b1c4;
-    color: #54b1c4;
-    border-radius: 5px;
-}
+
 @media (max-width: 767px){
     .author_head_m p a{
         color: #54b1c4;
@@ -3304,6 +3352,7 @@ span.has-error{
     background: #2e353e;
     border: 1px solid #54b1c4;
     color: #54b1c4;
+    border-radius: 5px;
 }
 .nav li:last-child a:hover {
     background: #54b1c4;
@@ -3312,18 +3361,14 @@ span.has-error{
 .footer_area a{
     color: #fff;
 }
-/*@media(max-width:767px){
-    .step_1, .step_2, .step_3 {
-    height: 400px;
-    overflow: scroll;
-}*/
+
 .navbar-brand>img {
     display: block;
     width: 120px;
-    padding-top: 6px;
+    padding-top: 0px;
 }
 .home_login {
-    top: 9px;
+    top: 0px;
 }
 #login_form span.has-error {
     margin-top: 0px!important;
@@ -3436,26 +3481,62 @@ span.has-error {
 .option_head h2:after {
     top: 30%;
 }
+@media(max-width:767px){
+	.home_login {
+	    top: 11px;
+	}
+	.navbar-brand>img {
+	    display: block;
+	    width: 120px;
+	    padding-top: 6px;
+	}
 }
 @media(max-width:390px){
-.service_inner_m h3 {
-    font-size: 15px;
+	.service_inner_m h3 {
+	    font-size: 15px;
+	}
+	.social_inner h3 a {
+	    padding: 2px 7px;
+	}
+	.social_inner h3 {
+	    font-size: 11.23px;
+	    padding-left: 57px;
+	}
 }
-.social_inner h3 a {
-    padding: 2px 7px;
-}
-.social_inner h3 {
-    font-size: 11.23px;
-    padding-left: 57px;
-}
-.footer_content_m ul li a {
-    font-size: 14px;
-}
+@media(max-width:590px){
+	.footer_content_m ul li a {
+	    font-size: 14px;
+	}
+	.footer_content_m ul li:before {
+	    top: 4px;
+	}	
 }
 @media(max-width:390px){
- .service_inner {
-    min-height: 350px;
-}
+ 	.service_inner {
+	    min-height: 350px;
+	}
+	.home_login a {
+	    font-size: 14px;
+	    padding: 3px 15px;
+	}
+	.footer_content_m ul li a {
+	    font-size: 12px;
+	}
+	.footer_content_m ul li:before {
+	    position: absolute;
+	    top: 4px;
+	    left: 0;
+	    width: 12px;
+	    height: 12px;
+	    background: #00abe0;
+	    border-radius: 50%;
+	    content: "";
+	}
+	.footer_content_m ul li {
+	    list-style: none;
+	    position: relative;
+	    padding-left: 19px;
+	}
 }
 
 .new_tag{
@@ -3469,10 +3550,10 @@ span.has-error {
     border: 1px solid #A9A9A9;
 }
 @media all and (max-width: 1199px) and (min-width: 991px) {
-      .service_inner {
-          min-height: 355px;
-      }
+    .service_inner {
+        min-height: 355px;
     }
+}
 
 
 
@@ -3553,3 +3634,4 @@ span.has-error {
 .select2-results__message{
 	cursor: pointer;
 }
+
