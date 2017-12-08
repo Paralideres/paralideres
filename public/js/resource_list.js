@@ -16,7 +16,8 @@ new Vue({
     },
     filters: {
         truncate: function (string, value) {
-            return string.substring(0, value) + '...';
+            return value;
+            return string.substr(0, value) + '...';
         }
     },
     methods: {
@@ -36,7 +37,7 @@ new Vue({
             var THIS = this;
             THIS.$common.loadingShow(0);
             axios.get(next_page_url)
-                .then(function () {
+                .then(function (response) {
                     THIS.resources = response.data.data;
                     THIS.$common.loadingHide(0);
                 });
@@ -49,16 +50,15 @@ new Vue({
             var THIS = this;
             var formData = $('#filterResource').serialize();
             console.log(formData);
-            axios.get(THIS.api_url + 'resources?' + formData)
-                .then(function () {
-                    THIS.resources = response.data.data;
-                });
+            axios.get(THIS.api_url + 'resources?' + formData).then(function (response) {
+                THIS.resources = response.data.data;
+            });
         },
 
         givenResourceLike: function (resource) {
             var THIS = this;
             axios.post(THIS.api_url + 'resources/' + resource.id + '/like')
-                .then(function () {
+                .then(function (response) {
                     if (response.data.status == 'like') {
                         if (resource.likes_count.length > 0) {
                             resource.likes_count[0].total += 1;

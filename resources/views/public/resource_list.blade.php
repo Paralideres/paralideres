@@ -44,7 +44,7 @@ $cat_slug=(isset($_GET['category']))?$_GET['category']:'';
                 </div>
             </div>
 
-            <div class="col-md-4" v-for="(resource_info, index) in resources.data">
+            <div class="col-md-4" v-if="resources.data.length > 0" v-for="(resource_info, index) in resources.data">
                 <div class="service_inner">
                     <div class="service_head">
                         <h2>
@@ -84,6 +84,13 @@ $cat_slug=(isset($_GET['category']))?$_GET['category']:'';
                         </span>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-12" v-if="resources.data.length == 0">
+                <br><br><br>
+                <div class="well">
+                    <h4 class="text-center text-danger">No Resource found. Please try another filter.</h4>
+                </div>
+                <br><br><br>
             </div>
             <div class="col-md-12 clearfix text-center">
                 <div class="service_btn" v-if="resources.data && resources.data.length > 0">
