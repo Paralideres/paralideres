@@ -15,22 +15,27 @@
                         @if(!$auth)
                         <form id="signup_form" v-on:submit.prevent="signup('signup_form')">
                             <div class="col-sm-3" :class="{'has-error':errors.email}">
-                                <input type="email" class="form-control" name="email" placeholder="Ingresa tu email">
+                                <input type="email" class="form-control resSignInt" name="email" placeholder="Ingresa tu email">
                                 <span v-if="errors.email" class="has-error" v-text="errors.email[0]"></span>
                             </div>
                             <div class="col-sm-3" :class="{'has-error':errors.password}">
-                                <input type="password" class="form-control" name="password" placeholder="Ingresa una clave">
+                                <input type="password" class="form-control resSignInt" name="password" placeholder="Ingresa una clave">
                                 <span v-if="errors.password" class="has-error" v-text="errors.password[0]"></span>
                             </div>
                             <div class="col-sm-3" :class="{'has-error':errors.password_confirmation}">
-                                <input type="password" class="form-control" name="password_confirmation" placeholder="Confirma tu clave">
+                                <input type="password" class="form-control resSignInt" name="password_confirmation" placeholder="Confirma tu clave">
                                 <span v-if="errors.password_confirmation" class="has-error" v-text="errors.password_confirmation[0]"></span>
                             </div>
 
                             <div class="col-sm-3">
-                                <button type="submit" :disabled="submitDisable" class="btn btn-dm form_hide_m">REGISTRARME</button>
+                                <button type="submit" :disabled="submitDisable" class="btn btn-dm">REGISTRARME</button>
                             </div>
-                            <button type="submit" class="btn btn-dm m_submit"><img :src="img_path+'/images/submit-arrow.png'" alt=""></button>
+                            {{--<div class="col-sm-3">
+                                <button type="submit" class="btn btn-dm m_submit btn-block">
+                                    <img :src="'{{env("APP_URL")}}/images/submit-arrow.png'" alt="">
+                                </button>
+                            </div>--}}
+
                         </form>
                         @endif
                     </div>
