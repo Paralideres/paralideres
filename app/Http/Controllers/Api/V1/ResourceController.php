@@ -56,17 +56,36 @@ class ResourceController extends Controller
         $tag_id = ($request->has('tag_id'))?$request->tag_id:null;
         $tag_slug = ($request->has('tag_slug'))?$request->tag_slug:null;
         $category_id = ($request->has('category_id'))?$request->category_id:null;
+        $author = ($request->has('author'))?$request->author:null;
+        $author_id = 0;
         if($request->has('cat_slug') && !empty($request->cat_slug)){
             $category_id = DB::table('categories')->where('slug',$request->cat_slug)->pluck('id');
         }
+        if($request->has('author') && !empty($request->author)){
+            $authorInfo = DB::table('users')->select('id')->where('username',$author)->where('is_active', 1)->get('id')->toArray();
+            if(count($authorInfo) > 0){
+                $author_id = $authorInfo[0]->id;
+            }
+        }
         $search_text = ($request->has('search_text'))?$request->search_text:null;
-
-        $resources = Resource::select('resources.*')->with(
-            ['likesCount', 'category', 'user',
-                'like' => function($q)use($user_id){
-                    $q->where('user_id', $user_id);
-                }
-            ]);
+        if($author != null){
+            $resources = Resource::select('resources.*')
+                ->where('resources.user_id', $author_id)
+                ->with(
+                    ['likesCount', 'category', 'user',
+                        'like' => function($q)use($user_id){
+                            $q->where('user_id', $user_id);
+                        }
+                    ]);
+        } else {
+            $resources = Resource::select('resources.*')
+                ->with(
+                    ['likesCount', 'category', 'user',
+                        'like' => function($q)use($user_id){
+                            $q->where('user_id', $user_id);
+                        }
+                    ]);
+        }
         if(!empty($tag_id) || !empty($tag_slug)){
             $resources->join('resource_tag', 'resource_tag.resource_id', '=', 'resources.id')
                 ->join('tags', 'tags.id', '=', 'resource_tag.tag_id')

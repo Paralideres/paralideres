@@ -16,7 +16,6 @@ new Vue({
     },
     filters: {
         truncate: function (string, value) {
-            return value;
             return string.substr(0, value) + '...';
         }
     },
@@ -24,7 +23,7 @@ new Vue({
         getResources: function () {
             var THIS = this;
             THIS.$common.loadingShow(0);
-            axios.get(THIS.api_url + 'resources?' + search_text + tag_slug + cat_slug)
+            axios.get(THIS.api_url + 'resources?' + search_text + tag_slug + cat_slug+author)
                 .then(function (response) {
                     THIS.resources = response.data.data;
                     THIS.$common.loadingHide(0);
@@ -45,16 +44,14 @@ new Vue({
                 scrollTop: 0
             }, 500);
         },
-
         filterResource: function () {
             var THIS = this;
             var formData = $('#filterResource').serialize();
             console.log(formData);
-            axios.get(THIS.api_url + 'resources?' + formData).then(function (response) {
+            axios.get(THIS.api_url + 'resources?' + formData+ author ).then(function (response) {
                 THIS.resources = response.data.data;
             });
         },
-
         givenResourceLike: function (resource) {
             var THIS = this;
             axios.post(THIS.api_url + 'resources/' + resource.id + '/like')
