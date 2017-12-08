@@ -10,7 +10,7 @@
 
     <div class="login_content" id="auth">
         <h2>Registrarme a Paralideres.org</h2>
-        <div class="login_inner clearfix">
+        <div class="login_inner removeVh clearfix">
             <form id="signup_form" v-on:submit.prevent="signup('signup_form')">
                 <div class="input_content clearfix" :class="{'has-error':errors.email}">
                     <label>USUARIO</label>
