@@ -38,6 +38,7 @@ Route::prefix('/')->namespace('Auth')->group(function(){
 
     // show web registration form
     Route::get('registrarme', 'LoginController@showRegistrationForm');
+    Route::get('el_triunfo', 'LoginController@showRegistrationSuccess');
 
     //Password Reset Routes...
     Route::get('password-reset', 'ForgotPasswordController@showLinkRequestForm');

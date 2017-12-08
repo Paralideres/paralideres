@@ -15,7 +15,7 @@
 
     <div class="login_content login_s" id="auth">
         <h2>Ingresa a Paralideres.org</h2>
-        <div class="login_inner clearfix">
+        <div class="login_inner removeVh clearfix">
             @if(isset($data) && $data['status'] == 2000)
                 <p class="text-center">{{$data['msg']}}</p>
                 <br><br>

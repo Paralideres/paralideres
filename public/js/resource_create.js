@@ -187,4 +187,36 @@ $(document).ready(function () {
             }
         });
     });
+
+    $('body').on('keydown', '.select2-search__field', function (e) {
+        if(e.which === 188 || e.which === 13){
+            e.preventDefault()
+        }
+    });
+    $('body').on('keyup', '.select2-search__field', function (e) {
+        var trigger = $(this);
+        if(e.which === 188 || e.which === 13){
+            e.preventDefault();
+            var text = trigger.val();
+            trigger.val('');
+            trigger.focus();
+            console.log(text);
+            text = text.replace(",", "");
+            $.ajax({
+                url: window.asset + "api/v1/tags/create",
+                data: {tag: text},
+                method: 'POST',
+                success: function (res) {
+                    res = JSON.parse(res);
+                    if (res.status === 2000) {
+                        var target = $('#select2');
+                        var html = '<option value="' + res.tag.id + '" selected>' + res.tag.label + '</option>';
+                        target.append(html);
+                        target.select2();
+                        trigger.focus();
+                    }
+                }
+            });
+        }
+    });
 });

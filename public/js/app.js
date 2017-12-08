@@ -51189,7 +51189,7 @@ $(document).ready(function () {
                         console.log(res);
                         if(res.status === 2000){
                             setTimeout(function () {
-                                window.location.href = '/ingreser';
+                                window.location.href = window.base_url+'el_triunfo';
                             }, 500);
                         } else {
                             THIS.errors = res.data;

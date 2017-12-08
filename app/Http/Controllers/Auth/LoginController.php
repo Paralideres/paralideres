@@ -58,4 +58,14 @@ class LoginController extends WebController
         return view('auth.register');
     }
 
+    /**
+     * Show the application's login form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationSuccess()
+    {
+        return view('auth.registerSuccess');
+    }
+
 }
