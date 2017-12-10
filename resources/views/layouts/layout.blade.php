@@ -13,6 +13,8 @@
     <link rel="apple-touch-icon" href="{{asset('apple-touch-icon.png')}}">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @yield('styles')
+<!-- Script for polyfilling Promises on IE9 and 10 -->
+    <script src='https://cdn.polyfill.io/v2/polyfill.min.js'></script>
     <script src="{{asset('js/modernizr-2.8.3-respond-1.4.2.min.js')}}"></script>
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">             
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
