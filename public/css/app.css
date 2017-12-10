@@ -12303,7 +12303,7 @@ a:hover, a:focus {
 	    padding: 20px;
 	}
 	.author_contect {
-	    padding: 15px;
+	    padding: 15px 0;
 	}
 }
 
@@ -13943,4 +13943,9 @@ span.has-error {
 .removeVh{
     height: inherit;
     overflow: inherit;
+}
+@media (max-width: 767px) {
+    .resSignInt{
+        margin-bottom: 5px;
+    }
 }

@@ -15,22 +15,27 @@
                         @if(!$auth)
                         <form id="signup_form" v-on:submit.prevent="signup('signup_form')">
                             <div class="col-sm-3" :class="{'has-error':errors.email}">
-                                <input type="email" class="form-control" name="email" placeholder="Ingresa tu email">
+                                <input type="email" class="form-control resSignInt" name="email" placeholder="Ingresa tu email">
                                 <span v-if="errors.email" class="has-error" v-text="errors.email[0]"></span>
                             </div>
                             <div class="col-sm-3" :class="{'has-error':errors.password}">
-                                <input type="password" class="form-control" name="password" placeholder="Ingresa una clave">
+                                <input type="password" class="form-control resSignInt" name="password" placeholder="Ingresa una clave">
                                 <span v-if="errors.password" class="has-error" v-text="errors.password[0]"></span>
                             </div>
                             <div class="col-sm-3" :class="{'has-error':errors.password_confirmation}">
-                                <input type="password" class="form-control" name="password_confirmation" placeholder="Confirma tu clave">
+                                <input type="password" class="form-control resSignInt" name="password_confirmation" placeholder="Confirma tu clave">
                                 <span v-if="errors.password_confirmation" class="has-error" v-text="errors.password_confirmation[0]"></span>
                             </div>
 
                             <div class="col-sm-3">
-                                <button type="submit" :disabled="submitDisable" class="btn btn-dm form_hide_m">REGISTRARME</button>
+                                <button type="submit" :disabled="submitDisable" class="btn btn-dm">REGISTRARME</button>
                             </div>
-                            <button type="submit" class="btn btn-dm m_submit"><img :src="img_path+'/images/submit-arrow.png'" alt=""></button>
+                            {{--<div class="col-sm-3">
+                                <button type="submit" class="btn btn-dm m_submit btn-block">
+                                    <img :src="'{{env("APP_URL")}}/images/submit-arrow.png'" alt="">
+                                </button>
+                            </div>--}}
+
                         </form>
                         @endif
                     </div>
@@ -103,7 +108,7 @@
 <section class="service_area form_hide_m">
     <div class="container">
         <div class="row">
-            <div class="col-md-4" v-for="(resource_info, index) in resources.data">
+            <div class="col-md-4" v-if="resources.data.length > 0" v-for="(resource_info, index) in resources.data">
                 <div class="service_inner">
                     <div class="service_head">
                         <h2>
@@ -118,7 +123,7 @@
                         <h3>
                             <img width="45px" class="img-circle" v-if="resource_info.user.image" :src="asset+'uploads/'+resource_info.user.image" alt="">
                             <img width="45px" class="img-circle" v-else :src="img_path+'/images/user.png'" alt="">
-                            author: <span v-text="resource_info.user.fullname || resource_info.user.username"></span>
+                            author: <a :href="base_url+'recursos?author='+resource_info.user.username" v-text="resource_info.user.fullname || resource_info.user.username"></a>
                         </h3>
                     </div>
                     <div class="comment">
@@ -131,6 +136,13 @@
                         </span>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-12" v-if="resources.data.length == 0">
+                <br><br><br>
+                <div class="well">
+                    <h4 class="text-center text-danger">No Resource found. Please try another filter.</h4>
+                </div>
+                <br><br><br>
             </div>
         </div>
         <div class="col-md-12 clearfix text-center">

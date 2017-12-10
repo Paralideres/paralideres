@@ -5,6 +5,7 @@
 <?php 
 $tag_slug=(isset($_GET['tag']))?$_GET['tag']:'';
 $cat_slug=(isset($_GET['category']))?$_GET['category']:'';
+$author=(isset($_GET['author']))?$_GET['author']:'';
 ?>
 
 <section class="service_area recurso_list" id="app">
@@ -50,7 +51,7 @@ $cat_slug=(isset($_GET['category']))?$_GET['category']:'';
                         <h2>
                             <img v-if="resource_info.category && (resource_info.category.id == 9 || resource_info.category.id == 11 || resource_info.category.id == 12)" :src="img_path+'/images/icon/cat-icon-12.png'" alt="">
                             <img v-else-if="resource_info.category" :src="img_path+'/images/icon/cat-icon-'+resource_info.category.id+'.png'" alt="">
-                            <span v-if="resource_info.category" v-text="resource_info.category.label"></span>
+                            <span><a :href="base_url+'recursos?category='+resource_info.category.slug" v-text="resource_info.category.label"></a></span>
                         </h2>
                     </div>
                     <h4><a :href="base_url+'recursos/'+resource_info.slug">@{{ resource_info.title}}</a></h4>
@@ -59,7 +60,7 @@ $cat_slug=(isset($_GET['category']))?$_GET['category']:'';
                         <h3>
                             <img width="45px" class="img-circle" v-if="resource_info.user.image" :src="img_path+'/uploads/'+resource_info.user.image" alt="">
                             <img width="45px" class="img-circle" v-else :src="img_path+'/images/user.png'" alt="">
-                            author: <span v-text="resource_info.user.fullname || resource_info.user.username"></span>
+                            author: <a :href="base_url+'recursos?author='+resource_info.user.username" v-text="resource_info.user.fullname || resource_info.user.username"></a>
                         </h3>
                     </div>
                     <div class="comment" :class="{'comment_red': resource_info.like.length > 0}">
@@ -109,6 +110,7 @@ $cat_slug=(isset($_GET['category']))?$_GET['category']:'';
         var search_text = '<?php $s=(isset($_GET['search_text']))?$_GET['search_text']:''; echo 'search_text='.$s;?>';
         var tag_slug = '<?php echo '&tag_slug='.$tag_slug;?>';
         var cat_slug = '<?php echo '&cat_slug='.$cat_slug;?>';
+        var author = '<?php echo '&author='.$author;?>';
     </script>
     <script type="text/javascript" src="{{asset('js/resource_list.js')}}"></script>
 @endsection
