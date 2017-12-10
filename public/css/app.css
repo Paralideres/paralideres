@@ -13949,3 +13949,22 @@ span.has-error {
         margin-bottom: 5px;
     }
 }
+    @media(min-width: 768px){
+        .recurso_single_header{}
+        .recurso_single_header .filter{
+            float: right;
+            position: absolute;
+            right: 0;
+            top: -56px;
+
+        }
+        .recurso_single_header .navbar-default {
+            background-color: transparent;
+            border-color: transparent;
+            margin-bottom: 0;
+            border: 0;
+            background: #334a5c;
+            border-radius: 0;
+            padding: 70px 0px 29px;
+        }        
+    }
