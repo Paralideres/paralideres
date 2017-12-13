@@ -10972,7 +10972,7 @@ a:hover, a:focus {
 
 .cat_left span {
     display: inline-block;
-    padding: 4px 10px;
+    padding: 4px 7px;
 }
 
 .cat_left span:nth-of-type(1) {
@@ -11019,7 +11019,13 @@ a:hover, a:focus {
     outline: 0;
     box-shadow: none;
 }
-
+@media all and (max-width: 1199px) and (min-width: 1034px) {
+    .cat_left span {
+        display: inline-block;
+        padding: 4px 4px;
+        font-size: 11px;
+    }
+}
 @media (max-width: 767px) {
     .cat_area {
         padding: 5px 0px 30px;
