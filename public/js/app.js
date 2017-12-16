@@ -40189,6 +40189,10 @@ $(document).ready(function () {
     });
 
     $(".open_login").click(function () {
+        $('#create_resource_form')[0].reset();
+        $('#select2').select2('destroy');
+        $('#select2').val([]);
+        $('#select2').select2();
         $(".popup_content").addClass("open_content");
         $('body').addClass('bodyScroll');
     });

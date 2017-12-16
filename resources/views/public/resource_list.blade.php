@@ -64,7 +64,7 @@ $author=(isset($_GET['author']))?$_GET['author']:'';
                         </h3>
                     </div>
                     <div class="comment" :class="{'comment_red': resource_info.like.length > 0}">
-                        <span><a :href="base_url+'recursos/'+resource_info.slug"><img :src="img_path+'/images/download.jpg'" alt="">ver/yo descargar discurso</a></span>
+                        <span><a :href="base_url+'recursos/'+resource_info.slug"><img :src="img_path+'/images/download.jpg'" alt="">Ver o Descargar recurso</a></span>
                         <span style="cursor: pointer" @if($auth) v-on:click.prevent="givenResourceLike(resource_info)" @else onclick="window.location.href='ingreser?redirect=resource_list'" @endif>
                             <span v-if="resource_info.likes_count.length > 0" v-text="resource_info.likes_count[0].total"></span>
                             <span v-else>0</span>

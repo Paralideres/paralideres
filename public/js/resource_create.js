@@ -55,30 +55,35 @@ $(document).ready(function () {
                 },
                 createResourceSetp1: function () {
                     var THIS = this;
-                    THIS.$common.loadingShow(0);
-                    // var formData = new FormData(e.target);
+                    var title = $('#create_resource_form').find('input[name="title"]').val();
+                    var review = $('#create_resource_form').find('textarea[name="review"]').val();
+                    var category_id = $('#create_resource_form').find('select[name="category_id"]').val();
+                    var tag_ids = $('#create_resource_form').find('select[name="tag_ids[]"]').val();
 
-                    var formData = $('#create_resource_form').serialize();
-                    formData += '&step=1';
+                    if (title.length > 0 && review.length > 0 && category_id > 0 && tag_ids.length > 0) {
+                        THIS.$common.loadingShow(0);
+                        var formData = $('#create_resource_form').serialize();
+                        formData += '&step=1';
 
-                    axios.post(window.base_url + window.api_url + 'resources', formData)
-                        .then(function (response) {
+                        axios.post(window.base_url + window.api_url + 'resources', formData)
+                            .then(function (response) {
+                                THIS.$common.loadingHide(0);
+                                THIS.errors1 = [];
+                                // this.$common.showMessage(response.data);
+                                // this.resources = response.data.data;
+                                $(".step_1").hide();
+                                $(".step_2").show();
+                            }).catch(function (error) {
                             THIS.$common.loadingHide(0);
                             THIS.errors1 = [];
-                            // this.$common.showMessage(response.data);
-                            // this.resources = response.data.data;
-                            $(".step_1").hide();
-                            $(".step_2").show();
-                        }).catch(function (error) {
-                        THIS.$common.loadingHide(0);
-                        THIS.errors1 = [];
-                        if (error.response.status == 500 && error.response.data.code == 500) {
-                            var error = error.response.data;
-                            // this.$common.showMessage(error);
-                        } else if (error.response.status == 422) {
-                            this.errors1 = error.response.data.errors;
-                        }
-                    });
+                            if (error.response.status == 500 && error.response.data.code == 500) {
+                                var error = error.response.data;
+                                // this.$common.showMessage(error);
+                            } else if (error.response.status == 422) {
+                                this.errors1 = error.response.data.errors;
+                            }
+                        });
+                    }
                 },
 
 
@@ -189,13 +194,13 @@ $(document).ready(function () {
     });
 
     $('body').on('keydown', '.select2-search__field', function (e) {
-        if(e.which === 188 || e.which === 13){
+        if (e.which === 188 || e.which === 13) {
             e.preventDefault()
         }
     });
     $('body').on('keyup', '.select2-search__field', function (e) {
         var trigger = $(this);
-        if(e.which === 188 || e.which === 13){
+        if (e.which === 188 || e.which === 13) {
             e.preventDefault();
             var text = trigger.val();
             trigger.val('');

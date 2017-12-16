@@ -100,31 +100,33 @@ $(document).ready(function () {
             },
             votePoll: function () {
                 var THIS = this;
-                var formID = document.querySelector('#votePoll');
-                var formData = new FormData(formID);
-                this.$common.loadingShow(0);
-                axios.post(THIS.base_url + THIS.api_url + 'polls/' + THIS.poll.id + '/vote', {
-                    'option': formData.get('poll_option')
-                }).then(function (response) {
-                    if(response.data.data.status === 2000){
+                var formID = $('#votePoll');
+                var option = formID.find('input:radio[name="poll_option"]:checked').val();
+                var formData = {
+                    option: option
+                };
+                THIS.$common.loadingShow(0);
+                axios.post(THIS.base_url + THIS.api_url + 'polls/' + THIS.poll.id + '/vote', formData)
+                    .then(function (response) {
                         THIS.$common.loadingHide(0);
-                        THIS.pollResult = true;
-                        THIS.poll = response.data.data.poll;
-                        THIS.$common.showMessage(response.data);
-                        THIS.checkedAnswer = formData.get('poll_option');
-                    } else if(response.data.data.status === 3000){
+                        if (response.data.data.status === 2000) {
+                            THIS.pollResult = true;
+                            THIS.poll = response.data.data.poll;
+                            THIS.$common.showMessage(response.data);
+                            THIS.checkedAnswer = option;
+                        } else if (response.data.data.status === 3000) {
+                            THIS.pollResult = true;
+                            THIS.poll = response.data.data.poll;
+                            THIS.$common.showMessage(response.data);
+                            THIS.checkedAnswer = response.data.data.has;
+                        }
+                    })
+                    .catch(function (error) {
                         THIS.$common.loadingHide(0);
-                        THIS.pollResult = true;
-                        THIS.poll = response.data.data.poll;
-                        THIS.$common.showMessage(response.data);
-                        THIS.checkedAnswer = response.data.data.has;
-                    }
-                }).catch(function (response) {
-                    this.$common.loadingHide(0);
-                    if (error.response.status == 500 && error.response.data.code == 500) {
-                        THIS.$common.showMessage(error);
-                    }
-                });
+                        if (error.response.status === 500 && error.response.data.code === 500) {
+                            THIS.$common.showMessage(error);
+                        }
+                    });
 
             },
         }
