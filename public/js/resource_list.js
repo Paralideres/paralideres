@@ -58,14 +58,14 @@ new Vue({
                 .then(function (response) {
                     if (response.data.status == 'like') {
                         if (resource.likes_count.length > 0) {
-                            resource.likes_count[0].total += 1;
+                            resource.likes_count[0].total = parseInt(resource.likes_count[0].total) + 1;
                         } else {
                             resource.likes_count = [{'resource_id': resource.id, 'total': 1}];
                         }
                         resource.like = [{'resource_id': resource.id, 'user_id': null}];
                     } else if (response.data.status == 'unlike') {
                         if (resource.likes_count.length > 0) {
-                            resource.likes_count[0].total -= 1;
+                            resource.likes_count[0].total = parseInt(resource.likes_count[0].total) - 1;
                         } else {
                             resource.likes_count = [{'resource_id': resource.id, 'total': 0}];
                         }

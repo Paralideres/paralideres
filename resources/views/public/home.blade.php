@@ -79,7 +79,7 @@
         <section class="cat_area">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-xs-12 col-md-7">
                         <div class="cat_left">
                             <h2><b>Categorias Populares:</b>
                                 @foreach($categories as $category)
@@ -94,7 +94,7 @@
                             </h2>
                         </div>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-xs-12 col-md-5">
                         <div class="cat_right">
                             <h2>
                                 <span>Buscador</span>
@@ -130,8 +130,8 @@
                                              v-text="resource_info.category.label"></a></span>
                                 </h2>
                             </div>
-                            <h4><a :href="base_url+'recursos/'+resource_info.slug">@{{ resource_info.title}}</a></h4>
-                            <p>@{{ resource_info.review | truncate(200) }}</p>
+                            <h4><a :href="base_url+'recursos/'+resource_info.slug" v-text="resource_info.title"></a></h4>
+                            <p v-text="resource_info.review | truncate(200)"></p>
                             <div class="author">
                                 <h3>
                                     <img width="45px" class="img-circle" v-if="resource_info.user.image"

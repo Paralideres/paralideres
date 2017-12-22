@@ -148,14 +148,14 @@
                             <div class="upload_file_wrapper clearfix">
                                 <div class="upload-recurso-box" v-on:click="option2">
                                     <div class="upload-recurso-box-content">
-                                        <img src="{{asset('images/file-up-img-2.png')}}" alt="">
-                                        <p>CLICK PARA CREAR UN RECURSO</p>
+                                        <img src="{{asset('images/file-up-img.png')}}" alt="">
+                                        <p>CLICK PARA SUBIR TU ARCHIVO</p>
                                     </div>
                                 </div>
                                 <div class="upload-recurso-box" v-on:click="option1">
                                     <div class="upload-recurso-box-content">
-                                        <img src="{{asset('images/file-up-img.png')}}" alt="">
-                                        <p>CLICK PARA SUBIR TU ARCHIVO</p>
+                                        <img src="{{asset('images/file-up-img-2.png')}}" alt="">
+                                        <p>USAR EL EDITOR DE TEXTO</p>
                                     </div>
                                 </div>
                                 {{--<div class="upload_text" v-on:click="option2">

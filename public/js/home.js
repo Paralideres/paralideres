@@ -23,6 +23,7 @@ $(document).ready(function () {
         methods: {
             getResources: function (search, value) {
                 var THIS = this;
+                console.log('amieami');
                 THIS.$common.loadingShow(0);
                 if (search != null) {
                     var action_url = '/' + search + '?search=' + value;
@@ -62,7 +63,7 @@ $(document).ready(function () {
 
                         if (resource.likes_count.length > 0) {
 
-                            resource.likes_count[0].total += 1;
+                            resource.likes_count[0].total = parseInt(resource.likes_count[0].total) + 1;
 
                         } else {
 
@@ -77,7 +78,7 @@ $(document).ready(function () {
 
                         if (resource.likes_count.length > 0) {
 
-                            resource.likes_count[0].total -= 1;
+                            resource.likes_count[0].total = parseInt(resource.likes_count[0].total) - 1;
 
                         } else {
 
