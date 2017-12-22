@@ -95,7 +95,7 @@
                         </div>
                     </div>
                     <div class="col-md-5">
-                        <div class="cat_right form_hide_m">
+                        <div class="cat_right">
                             <h2>
                                 <span>Buscador</span>
                                 <input type="search" v-on:keyup.prevent="getResources('search', $event.target.value)"

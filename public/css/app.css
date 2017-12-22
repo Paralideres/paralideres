@@ -11070,6 +11070,10 @@ a:hover, a:focus {
     .cat_left span:nth-of-type(4) {
         background: #2bcb80;
     }
+    .cat_right {
+        clear: both;
+        padding-top: 11px;
+    }
 }
 
 @media (max-width: 610px) {
@@ -11237,7 +11241,8 @@ a:hover, a:focus {
     background: #ebebeb;
     color: #2e353e;
     font-weight: bold;
-    padding: 10px 15px;
+    padding: 13px 50px;
+    border-radius: 5px;
 }
 
 /*---------------------------------------
@@ -13155,6 +13160,8 @@ span.cat-10 {
     border: 2px solid #edeef0;
     padding: 10px;
     text-align: center;
+    position: relative;
+    background: #f9f9f9;
 }
 .upload-recurso-box .upload-recurso-box-content{
     display: table;
@@ -13170,6 +13177,27 @@ span.cat-10 {
     text-align: center;
     margin: 0;
     padding: 10px 0;
+}
+.step_2 .upload-recurso-box  p{
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding: 10px 0;
+    position: absolute;
+    bottom: 4px;
+    color: #2e353e;
+    left: 0;
+    top: auto;
+}
+.step_2 .upload_file_area p {
+    text-align: center;
+    color: #2e353e;
+}
+.step_3 .text_area_file {
+    margin-bottom: 0px;
+}
+.step_3 .text_area_file textarea{
+    margin-bottom: 20px;
 }
 @media (max-width: 455px) {
     .upload-recurso-box{
@@ -13858,15 +13886,15 @@ span.has-error {
 }
 
 .option_head h2 {
-    font-size: 60px;
+    font-size: 25px;
 }
 
 .option_head h2:before {
-    top: 39%;
+    top: 25%;
 }
 
 .option_head h2:after {
-    top: 39%;
+    top: 25%;
 }
 
 @media (max-width: 767px) {
