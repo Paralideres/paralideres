@@ -79,7 +79,7 @@
         <section class="cat_area">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-7">
                         <div class="cat_left">
                             <h2><b>Categorias Populares:</b>
                                 @foreach($categories as $category)
@@ -94,7 +94,7 @@
                             </h2>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <div class="cat_right form_hide_m">
                             <h2>
                                 <span>Buscador</span>

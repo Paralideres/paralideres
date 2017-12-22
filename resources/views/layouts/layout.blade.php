@@ -225,8 +225,8 @@
                     </div>
                 </div>
             </div>
-            <div class="sr-overlay"></div>
         </form>
+        <div class="sr-overlay"></div>        
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{asset('js/resource_create.js')}}"></script>
