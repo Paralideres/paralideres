@@ -6491,7 +6491,7 @@ button.close {
 }
 
 @-ms-viewport {
-    width: device-width
+    /*width: device-width*/
 }
 
 .visible-xs, .visible-sm, .visible-md, .visible-lg {
@@ -10665,8 +10665,8 @@ a:hover, a:focus {
 .nav > li > a {
     position: relative;
     display: block;
-    padding: 8px 40px;
-    font-size: 20px;
+    padding: 8px 18px;
+    font-size: 14px;
     color: #fff !important;
     font-family: 'Fira Sans';
     font-weight: bold;
@@ -10703,7 +10703,7 @@ a:hover, a:focus {
     text-transform: uppercase;
     display: inline-block;
     padding: 10px 40px;
-    font-size: 20px;
+    font-size: 14px;
     color: #fff !important;
     font-family: 'Fira Sans';
     font-weight: bold;
@@ -10830,19 +10830,23 @@ a:hover, a:focus {
     display: block;
     width: auto !important;
 }
-
+@media (min-width: 1200px){
+.banner_area .container {
+    width: 1268px;
+}
+}
 @media (min-width: 768px) {
     .navbar-nav {
         float: left;
         margin: 0;
-        padding-right: 160px;
+        padding-right: 126px;
     }
 
 }
 
 @media (max-width: 991px) {
     .navbar-nav {
-        padding-right: 90px;
+        padding-right: 126px;
     }
 
     .nav li:last-child a {
@@ -10974,7 +10978,7 @@ a:hover, a:focus {
 
 .cat_left span {
     display: inline-block;
-    padding: 4px 7px;
+    padding: 4px 4px;
 }
 
 .cat_left span:nth-of-type(1) {
@@ -11095,6 +11099,7 @@ a:hover, a:focus {
     margin-bottom: 40px;
     min-height: 315px;
     position: relative;
+    font-family: 'Fira Sans';
 }
 
 .service_head {
@@ -11524,14 +11529,14 @@ a:hover, a:focus {
     SOCIAL SHARE AREA
 -----------------------------------------*/
 .social_share_area {
-    margin: 50px 0px 25px;
+    padding: 70px 0px 50px;
 }
 
 .social_share_area {
 }
 
 .social_inner {
-    padding: 15px 0px;
+    padding: 12px 0px;
     background: #3765a3;
     position: relative;
     margin-bottom: 25px;
@@ -11549,7 +11554,7 @@ a:hover, a:focus {
 }
 
 .social_inner h3 span img {
-    padding-top: 18px;
+    padding-top: 14px;
 }
 
 .social_inner h3 span {
@@ -11564,7 +11569,7 @@ a:hover, a:focus {
 
 .social_inner h3 a {
     position: absolute;
-    top: 14px;
+    top: 10px;
     right: 12px;
     border: 1px solid #fff;
     padding: 2px 21px;
@@ -11611,7 +11616,7 @@ a:hover, a:focus {
     font-size: 12px;
     color: #ffffff;
     text-align: center;
-    padding: 25px 0px;
+    padding: 20px 0px;
     margin-bottom: 0;
     font-family: 'Fira Sans Book';
     background: #222830;
@@ -11793,7 +11798,7 @@ a:hover, a:focus {
 .author_desc h3 span {
     display: inline-block;
     background: #334a5c;
-    padding: 8px 15px;
+    padding: 12px 15px;
     border-radius: 5px;
     color: #54b1c4;
     margin-right: 10px;
@@ -11871,7 +11876,7 @@ a:hover, a:focus {
 
 .author_bottom a {
     display: inline-block;
-    padding: 5px 15px;
+    padding: 5px 25px;
     font-size: 12px;
     color: #334a5c;
     font-weight: bold;
@@ -11879,6 +11884,7 @@ a:hover, a:focus {
     margin-right: 10px;
     background: #edeef0;
     margin-bottom: 15px;
+    text-transform: uppercase;
 
 }
 
@@ -11893,6 +11899,8 @@ a:hover, a:focus {
     color: #334a5c;
     font-weight: bold;
     font-family: 'Fira Sans';
+    margin-top: 50px;
+    text-transform: uppercase;
 }
 
 .sidebar > img {
@@ -12024,6 +12032,7 @@ a:hover, a:focus {
 .filter_content {
     border: 1px solid #c2c5c7;
     display: inline-block;
+    border-radius: 0px 5px 5px 0px;
 }
 
 .filter_content select {
@@ -12285,7 +12294,7 @@ a:hover, a:focus {
     }
 
     .blog_content_inner h2 {
-        font-size: 40px;
+        font-size: 24px;
         color: #334a5c;
         font-weight: bold;
         margin-bottom: 0;
@@ -12627,22 +12636,22 @@ a:hover, a:focus {
 
 .login_content {
     max-width: 665px;
-    margin: 100px auto;
     background: #fff;
     width: 100%;
     padding: 0px;
     margin-bottom: 100px;
-    box-shadow: 0px 10px 46px #ddd;
+    box-shadow: 0px 0px 0px #ddd;
     padding-top: 0;
     padding-bottom: 0px;
+    border-radius: 5px;
 }
 
 .login_inner {
     padding: 20px;
     display: inline-block;
     width: 100%;
-    height: calc(100vh - 130px);
-    max-height: 450px;
+    /*height: calc(100vh - 130px);
+    max-height: 450px;*/
     overflow: auto;
 }
 
@@ -12863,7 +12872,7 @@ a:hover, a:focus {
 }
 
 .filter_content form input, .filter_content form input:hover, .filter_content form input:focus {
-    height: 39px;
+    height: 38px;
 }
 
 /*---------------------------------------
@@ -13075,30 +13084,35 @@ span.cat-10 {
     transition: all .5s;
 }
 
-.blank_content {
+/*.blank_content {
     height: 600px;
-}
+}*/
 
 .login_content {
+
+}
+#create_resource_form{
     max-width: 665px;
-    margin: 100px auto;
+    margin: 0 auto;
     background: #fff;
     width: 100%;
     padding: 0px;
-    margin-bottom: 100px;
-    box-shadow: 0px 10px 46px #4e545a;
+    box-shadow: 0px 0px 0px #f1f1f1;
     padding-top: 0;
     padding-bottom: 0px;
     z-index: 20000;
     position: relative;
+    top: 50%;
+    -webkit-transform: translate(0px, -50%);
+    -khtml-transform: translate(0px, -50%);
+    -moz-transform: translate(0px, -50%);
+    -ms-transform: translate(0px, -50%);
+    -o-transform: translate(0px, -50%);
+    transform: translate(0px, -50%);
+    border-radius: 5px;
 }
-
 .step_1, .step_2, .step_3 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: #fff;
+
 }
 
 .step_1, .step_2, .step_3, .step_4 {
@@ -13137,9 +13151,8 @@ span.cat-10 {
     width: 200px;
     height: 200px;
     display: inline-block;
-    margin: 2px;
-    background: #e6e6e6;
-    border: 1px solid #d6d6d6;
+    margin: 2px 15px;
+    border: 2px solid #edeef0;
     padding: 10px;
     text-align: center;
 }
@@ -13333,7 +13346,7 @@ span.cat-10 {
 }
 
 .select2.select2-container {
-    width: 452px !important;
+    width: 500px !important;
 }
 
 .select2-container .select2-search--inline .select2-search__field {
@@ -13751,7 +13764,7 @@ span.has-error {
 }
 
 .home_login a {
-    padding: 3px 20px;
+    padding: 8px 36px;
 }
 
 .service_inner_m {
@@ -13773,7 +13786,7 @@ span.has-error {
 
 .login_content {
     margin-bottom: 0px;
-    margin: 30px auto;
+    margin: 0 auto;
 }
 
 .recurso_header .navbar-brand > img {
@@ -13845,15 +13858,15 @@ span.has-error {
 }
 
 .option_head h2 {
-    font-size: 32px;
+    font-size: 60px;
 }
 
 .option_head h2:before {
-    top: 30%;
+    top: 39%;
 }
 
 .option_head h2:after {
-    top: 30%;
+    top: 39%;
 }
 
 @media (max-width: 767px) {
@@ -13864,7 +13877,7 @@ span.has-error {
     .navbar-brand > img {
         display: block;
         width: 120px;
-        padding-top: 11px;
+        padding-top: 7px;
     }
 }
 
@@ -13933,6 +13946,9 @@ span.has-error {
     text-transform: uppercase;
 }
 
+.input_content {
+    margin-bottom: 5px;
+}
 .input_content input {
     border: 1px solid #A9A9A9;
 }

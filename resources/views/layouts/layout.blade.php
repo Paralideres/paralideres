@@ -29,7 +29,7 @@
     <script>
         window.asset = '{{env("APP_URL")}}/';
         window.base_url = '{{env("APP_URL")}}/';
-        window.img_path = '{{env("APP_URL")}}';
+        window.img_path = '{{env("APP_URL")}}/public';
         window.api_url = 'api/v1/';
     </script>
 </head>
@@ -146,16 +146,16 @@
                             <p><span>Sube tu contenido,</span> puedes hacer con un archivo o copiando el texto. <span>Elije una opción:</span>
                             </p>
                             <div class="upload_file_wrapper clearfix">
-                                <div class="upload-recurso-box" v-on:click="option1">
-                                    <div class="upload-recurso-box-content">
-                                        <img src="{{asset('images/file-up-img.png')}}" alt="">
-                                        <p>CLICK PARA SUBIR TU ARCHIVO</p>
-                                    </div>
-                                </div>
                                 <div class="upload-recurso-box" v-on:click="option2">
                                     <div class="upload-recurso-box-content">
                                         <img src="{{asset('images/file-up-img-2.png')}}" alt="">
                                         <p>CLICK PARA CREAR UN RECURSO</p>
+                                    </div>
+                                </div>
+                                <div class="upload-recurso-box" v-on:click="option1">
+                                    <div class="upload-recurso-box-content">
+                                        <img src="{{asset('images/file-up-img.png')}}" alt="">
+                                        <p>CLICK PARA SUBIR TU ARCHIVO</p>
                                     </div>
                                 </div>
                                 {{--<div class="upload_text" v-on:click="option2">
@@ -225,8 +225,8 @@
                     </div>
                 </div>
             </div>
-            <div class="sr-overlay"></div>
         </form>
+        <div class="sr-overlay"></div>        
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{asset('js/resource_create.js')}}"></script>
