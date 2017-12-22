@@ -10733,7 +10733,11 @@ a:hover, a:focus {
 .banner_area {
     background: #283a4a;
 }
-
+.banner_area {
+    background: #283a4a url(../images/banner-bg.jpg) top center;
+    background-position: center center;
+    background-size:cover; 
+}
 .banner_wrapper {
     background: url(../images/banner-bg.png);
     background-size: cover;
