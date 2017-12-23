@@ -9,12 +9,21 @@ $(document).ready(function () {
                 errors1: [],
                 errors2: [],
                 errors3: [],
+                recurso: {
+                    title: '',
+                    description: '',
+                    cat_id: '',
+                    catThumb: '',
+                }
             },
             created: function () {
                 $("#old_tag").show();
                 $("#new_tag").hide();
             },
             methods: {
+                categorySelect: function () {
+                    this.recurso.catThumb = window.img_path + '/images/icon/cat-icon-' + this.recurso.cat_id + '.png'
+                },
                 newTag: function () {
                     $('#select2').prop('selectedIndex', -1);
                     $("#old_tag").hide();
@@ -73,16 +82,19 @@ $(document).ready(function () {
                                 // this.resources = response.data.data;
                                 $(".step_1").hide();
                                 $(".step_2").show();
-                            }).catch(function (error) {
-                            THIS.$common.loadingHide(0);
-                            THIS.errors1 = [];
-                            if (error.response.status == 500 && error.response.data.code == 500) {
-                                var error = error.response.data;
-                                // this.$common.showMessage(error);
-                            } else if (error.response.status == 422) {
-                                this.errors1 = error.response.data.errors;
-                            }
-                        });
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                                console.log(error.response);
+                                THIS.$common.loadingHide(0);
+                                THIS.errors1 = [];
+                                if (error.response.status == 500 && error.response.data.code == 500) {
+                                    var error = error.response.data;
+                                    THIS.$common.showMessage(error);
+                                } else if (error.response.status == 422) {
+                                    THIS.errors1 = error.response.data.errors;
+                                }
+                            });
                     }
                 },
 
