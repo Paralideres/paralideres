@@ -54,8 +54,8 @@ $author=(isset($_GET['author']))?$_GET['author']:'';
                             <span><a :href="base_url+'recursos?category='+resource_info.category.slug" v-text="resource_info.category.label"></a></span>
                         </h2>
                     </div>
-                    <h4><a :href="base_url+'recursos/'+resource_info.slug">@{{ resource_info.title}}</a></h4>
-                    <p>@{{ resource_info.review | truncate(200) }}</p>
+                    <h4><a :href="base_url+'recursos/'+resource_info.slug" v-text="resource_info.title"></a></h4>
+                    <p v-html="resource_info.review.substr(0, 200) + '...'"></p>
                     <div class="author">
                         <h3>
                             <img width="45px" class="img-circle" v-if="resource_info.user.image" :src="img_path+'/uploads/'+resource_info.user.image" alt="">
@@ -100,7 +100,7 @@ $author=(isset($_GET['author']))?$_GET['author']:'';
         var cat_slug = '<?php echo '&cat_slug='.$cat_slug;?>';
         var author = '<?php echo '&author='.$author;?>';
     </script>
-    <script type="text/javascript" src="{{asset('js/resource_list.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/resource_list.js')}}?js={{uniqid()}}"></script>
 @endsection
 
 

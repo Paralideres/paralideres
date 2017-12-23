@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Resource;
+use App\Models\Category;
+use App\Models\User;
 use App\Models\Like;
 use App\Models\Collection;
 use App\Models\Tag;
@@ -121,11 +123,63 @@ class ResourceController extends Controller
         $limit = intval($request->limit);
         $limit = $limit > 0 && $limit < 20 ? $limit : 20;
 
-        $resources = Resource::with('likesCount', 'category', 'user')
+        $rv = array();
+        $resourceModel = new Resource();
+        $data = $resourceModel
+            ->where('title','like','%'.$request->search.'%')
+            ->take($limit)
+            ->orderBy('created_at', 'desc')
+            ->get()->toArray();
+        if(count($data) > 0){
+            foreach ($data as $recurso){
+                $eachRecurso = $recurso;
+                $eachRecurso['category'] = array();
+                $CategoryModel = new Category();
+                $CategoryInfo = $CategoryModel->where('id', $eachRecurso['category_id'])
+                    ->get()->toArray();
+                if(count($CategoryInfo) > 0){
+                    $eachRecurso['category'] = $CategoryInfo[0];
+                }
+                $eachRecurso['user'] = array();
+                $userModel = new User();
+                $userInfo = $userModel->select('id','username')->where('id', $eachRecurso['user_id'])
+                    ->get()->toArray();
+                if(count($userInfo) > 0){
+                    $userInfo[0]['image'] = null;
+                    $userInfo[0]['fullname'] = null;
+                    $eachRecurso['user'] = $userInfo[0];
+                }
+                $likeModel = new Like();
+                $totalLike = $likeModel->where('resource_id', $eachRecurso['id'])->count();
+                $eachRecurso['likes_count'] = array(
+                    "resource_id" => $eachRecurso['id'],
+                    "total" => $totalLike
+                );
+                $eachRecurso['like'] = array();
+                $totalLike = $likeModel->where('resource_id', $eachRecurso['id'])->where('user_id', $eachRecurso['user_id'])->count();
+                if($totalLike > 0){
+                    $eachRecurso['like'] = array(
+                        "resource_id" => $eachRecurso['id'],
+                        "user_id" => $eachRecurso['user_id']
+                    );
+                }
+
+                if(count($userInfo) > 0){
+                    $userInfo[0]['image'] = null;
+                    $userInfo[0]['fullname'] = null;
+                    $eachRecurso['user'] = $userInfo[0];
+                }
+                $rv[] = $eachRecurso;
+            }
+        }
+        return json_encode($rv, true);
+
+
+        /*$resources = Resource::with('likesCount', 'category', 'user')
             ->where('title','like','%'.$request->search.'%')
             ->orderBy('created_at', 'desc')
-            ->Paginate($limit);
-        return $this->setResponse($resources,'success','OK','200','','');
+            ->Paginate($limit);*/
+//        return $this->setResponse($resources,'success','OK','200','','');
     }
 
 

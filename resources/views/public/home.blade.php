@@ -131,7 +131,7 @@
                                 </h2>
                             </div>
                             <h4><a :href="base_url+'recursos/'+resource_info.slug" v-text="resource_info.title"></a></h4>
-                            <p v-text="resource_info.review | truncate(200)"></p>
+                            <p v-html="resource_info.review.substr(0, 200) + '...'"></p>
                             <div class="author">
                                 <h3>
                                     <img width="45px" class="img-circle" v-if="resource_info.user.image"
@@ -284,12 +284,3 @@
 @section('scripts')
     <script type="text/javascript" src="{{asset('js/home.js')}}?js={{uniqid()}}"></script>
 @endsection
-
-
-
-
-
-                               
-
-
-

@@ -1,7 +1,7 @@
 /**
  * Created by Tarek on 10/20/2017.
  */
-// $(document).ready(function () {
+$(document).ready(function () {
 new Vue({
     el: '#app',
     data: {
@@ -47,23 +47,24 @@ new Vue({
         filterResource: function () {
             var THIS = this;
             var formData = $('#filterResource').serialize();
-            console.log(formData);
+            THIS.$common.loadingShow(0);
             axios.get(THIS.api_url + 'resources?' + formData+ author ).then(function (response) {
                 THIS.resources = response.data.data;
             });
         },
         givenResourceLike: function (resource) {
             var THIS = this;
+            THIS.$common.loadingShow(0);
             axios.post(THIS.api_url + 'resources/' + resource.id + '/like')
                 .then(function (response) {
-                    if (response.data.status == 'like') {
+                    if (response.data.status === 'like') {
                         if (resource.likes_count.length > 0) {
                             resource.likes_count[0].total = parseInt(resource.likes_count[0].total) + 1;
                         } else {
                             resource.likes_count = [{'resource_id': resource.id, 'total': 1}];
                         }
                         resource.like = [{'resource_id': resource.id, 'user_id': null}];
-                    } else if (response.data.status == 'unlike') {
+                    } else if (response.data.status === 'unlike') {
                         if (resource.likes_count.length > 0) {
                             resource.likes_count[0].total = parseInt(resource.likes_count[0].total) - 1;
                         } else {
@@ -76,6 +77,5 @@ new Vue({
 
 
     }
-
 });
-// });
+});

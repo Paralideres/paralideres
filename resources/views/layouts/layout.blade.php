@@ -29,7 +29,7 @@
     <script>
         window.asset = '{{env("APP_URL")}}/';
         window.base_url = '{{env("APP_URL")}}/';
-        window.img_path = '{{env("APP_URL")}}/public';
+        window.img_path = '{{env("APP_URL")}}';
         window.api_url = 'api/v1/';
     </script>
 </head>

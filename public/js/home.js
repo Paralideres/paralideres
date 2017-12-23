@@ -6,7 +6,9 @@ $(document).ready(function () {
             base_url: window.base_url,
             img_path: window.img_path,
             api_url: window.api_url,
-            resources: [],
+            resources: {
+                data : []
+            },
             checkedAnswer: 0,
             poll: [],
             pollResult: false
@@ -23,17 +25,17 @@ $(document).ready(function () {
         methods: {
             getResources: function (search, value) {
                 var THIS = this;
-                console.log('amieami');
+                console.log(search);
                 THIS.$common.loadingShow(0);
-                if (search != null) {
-                    var action_url = '/' + search + '?search=' + value;
+                if (value !== undefined) {
+                    var action_url = '/search?search=' + value;
                 } else {
-                    var action_url = '';
+                    var action_url = '/search?search=';
                 }
 
                 axios.get(this.api_url + 'resources' + action_url)
                     .then(function (response) {
-                        THIS.resources = response.data.data;
+                        THIS.resources.data = response.data;
                         THIS.$common.loadingHide(0);
                     });
             },
