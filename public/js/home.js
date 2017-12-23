@@ -116,12 +116,15 @@ $(document).ready(function () {
                             THIS.pollResult = true;
                             THIS.poll = response.data.data.poll;
                             THIS.$common.showMessage(response.data);
-                            THIS.checkedAnswer = option;
                         } else if (response.data.data.status === 3000) {
                             THIS.pollResult = true;
                             THIS.poll = response.data.data.poll;
                             THIS.$common.showMessage(response.data);
-                            THIS.checkedAnswer = response.data.data.has;
+                            if(response.data.data.has !== undefined){
+                                THIS.checkedAnswer = response.data.data.has;
+                            } else {
+                                THIS.checkedAnswer = parseInt(option);
+                            }
                         }
                     })
                     .catch(function (error) {
