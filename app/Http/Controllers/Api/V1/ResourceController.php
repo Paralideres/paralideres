@@ -250,7 +250,7 @@ class ResourceController extends Controller
         else if($request->has('step') && $request->step == 3)
         {
             $request->validate([
-                'attach' => 'required|mimes:pdf,doc,docs,ppt,pptx,rtf,txt|max:3000',
+                'attach' => 'required|mimes:pdf,doc,docx,ppt,pptx,rtf,txt|max:3000',
             ], [], ['ARCHIVO' => 'ARCHIVO']);
 
             $resource = new Resource([

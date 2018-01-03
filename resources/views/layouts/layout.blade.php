@@ -123,6 +123,7 @@
                                     @endforeach
                                 @endif
                             </select>
+                            <span class="hints">Elija o cree una nueva etiqueta escribiendo una nueva</span>
                             {{--<a class="new_tag" href="#" v-on:click.prevent="newTag">Crear nueva etiqueta</a>--}}
                         </div>
                         <div class="input_content clearfix" id="new_tag">

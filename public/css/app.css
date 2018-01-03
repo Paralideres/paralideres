@@ -12431,6 +12431,16 @@ a:hover, a:focus {
     padding-right: 30px;
     padding-top: 15px;
 }
+.input_content .hints {
+    bottom: 0;
+    color: #1d1d1d;
+    font-size: 12px;
+    font-weight: 300;
+    margin-bottom: 10px;
+    padding: 0;
+    position: absolute;
+    right: 0;
+}
 
 .input_content input {
     width: 80%;
@@ -13981,6 +13991,7 @@ span.has-error {
 
 .input_content {
     margin-bottom: 5px;
+    position: relative;
 }
 .input_content input {
     border: 1px solid #A9A9A9;

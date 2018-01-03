@@ -118,28 +118,35 @@ class PollController extends Controller
         ])->first();
 
         if ($hasVoted) {
-            $poll = Poll::with('options.votes', 'options.votes.user')->findOrFail($id);
-            //return $this->setResponse($poll, 'warning', 'OK', '200', 'Warning!', 'Only one vote per user per poll');
-            $rv = array(
-                "status" => 3000,
-                "poll" => $poll,
-                "has" => $hasVoted->poll_options_id
-            );
-             return $this->setResponse($rv, 'done', 'OK', '200', 'Vota el éxito', 'Gracias! Tu voto ha sido enviado');
+
+        } else {
+            $pollVote = new PollVote([
+                'poll_id' => $id,
+                'poll_options_id' => $request->option
+            ]);
+            Auth::user()->pollVote()->save($pollVote);
         }
 
-        $pollVote = new PollVote([
-            'poll_id' => $id,
-            'poll_options_id' => $request->option
-        ]);
-
-        Auth::user()->pollVote()->save($pollVote);
-        $poll = Poll::with('options.votes', 'options.votes.user')->findOrFail($id);
+        $poll = Poll::where('id',$id)->get()->toArray();
+        $poll = $poll[0];
+        $poll['options'] = array();
+        $options = PollOption::where('poll_id',$id)->get()->toArray();
+        foreach ($options as $p){
+            $eachOption = $p;
+            $eachOption['votes'] = array();
+            $eachOption['votes']['poll_options_id'] = $p['id'];
+            $eachOption['votes']['total'] = PollVote::where('poll_id',$id)
+                ->where('poll_options_id',$p['id'])
+                ->count();
+            $eachOption['votes']['poll_options_id'] = $p['id'];
+            $poll['options'][] = $eachOption;
+        }
         $rv = array(
             "status" => 3000,
-            "poll" => $poll
+            "poll" => $poll,
+            "has" => isset($hasVoted->poll_options_id) ? $hasVoted->poll_options_id : $request->option
         );
-        return $this->setResponse($rv, 'success', 'OK', '200', 'Vota el éxito', 'Gracias! Tu voto ha sido enviado');
+        return $this->setResponse($rv, 'done', 'OK', '200', 'Vota el éxito', 'Gracias! Tu voto ha sido enviado');
     }
 
     public function result($id) {
