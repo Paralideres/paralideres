@@ -29,34 +29,28 @@ $(document).ready(function () {
                     $("#old_tag").hide();
                     $("#new_tag").show();
                 },
-
                 oldTag: function () {
                     $('#newTag').val("");
                     $("#old_tag").show();
                     $("#new_tag").hide();
                 },
-
                 option1: function () {
                     $(".step_2").hide();
                     $(".step_3").show();
                 },
-
                 option2: function () {
                     $(".step_2").hide();
                     $(".step_4").show();
                 },
-
                 closePopup: function () {
                     $('body').removeClass('bodyScroll');
                     $(".popup_content").removeClass("open_content");
                     $(".step_1 ,.step_2 ,.step_3, .step_4").hide();
                 },
-
                 back1: function () {
                     $(".step_1").show();
                     $(".step_2").hide();
                 },
-
                 back2: function () {
                     $(".step_2").show();
                     $(".step_3").hide();
@@ -97,8 +91,6 @@ $(document).ready(function () {
                             });
                     }
                 },
-
-
                 createResourceSetp2: function () {
                     var THIS = this;
                     THIS.$common.loadingShow(0);
@@ -125,8 +117,6 @@ $(document).ready(function () {
                         }
                     });
                 },
-
-
                 createResourceSetp3: function (e) {
                     var THIS = this;
                     THIS.$common.loadingShow(0);
@@ -155,30 +145,7 @@ $(document).ready(function () {
                             THIS.errors3 = error.response.data.errors;
                         }
                     });
-                },
-
-
-                // createResource(e){
-                //     this.$common.loadingShow(0);
-                //     var formData = new FormData(e.target);
-                //     axios.post(window.base_url + window.api_url + 'resources', formData)
-                //         .then((response) => {
-                //         this.$common.loadingHide(0);
-                //         this.errors = [];
-                //         this.$common.showMessage(response.data);
-                //         this.resources = response.data.data;
-                //         e.target.reset();
-                //     }).catch((error) => {
-                //             this.$common.loadingHide(0);
-                //         this.errors = [];
-                //         if (error.response.status == 500 && error.response.data.code == 500) {
-                //             var error = error.response.data;
-                //             this.$common.showMessage(error);
-                //         } else if (error.response.status == 422) {
-                //             this.errors = error.response.data.errors;
-                //         }
-                //     });
-                // }
+                }
             }
         });
     }
@@ -204,7 +171,6 @@ $(document).ready(function () {
             }
         });
     });
-
     $('body').on('keydown', '.select2-search__field', function (e) {
         if (e.which === 188 || e.which === 13) {
             e.preventDefault()

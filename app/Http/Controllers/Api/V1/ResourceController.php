@@ -8,8 +8,10 @@ use App\Models\User;
 use App\Models\Like;
 use App\Models\Collection;
 use App\Models\Tag;
+use App\Models\Resource_tag;
 
 
+use Carbon\Carbon;
 use Storage;
 use DB;
 use App\Service\CommonService;
@@ -21,6 +23,7 @@ use App\Http\Requests\Resource\ResourceDeleteRequest;
 use App\Http\Requests\Resource\ResourceUploadRequest;
 use App\Http\Requests\Resource\ResourceUpdateRequest;
 use App\Http\Requests\Resource\ResourceAddToCollectionRequest;
+use Illuminate\Support\Facades\Validator;
 
 class ResourceController extends Controller
 {
@@ -303,6 +306,113 @@ class ResourceController extends Controller
 
     }
 
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function updateRecurso(Request $request)
+    {
+        if(Auth::check()) {
+            $userInfo = Auth::user();
+            $input = $request->input();
+            if($request->has('step') && $request->step == 1){
+                $request->validate([
+                    'title' => 'required|max:100',
+                    'review' => 'required|max:300',
+                    'category_id' => 'exists:categories,id',
+                ], [], [
+                    'title' => 'TITULO RECURSO',
+                    'review' => 'RESEÑA O RESUME',
+                    'category_id' => 'CATEGORIA',
+                ]);
+                return $this->setResponse([],'success','OK','200','','');
+            }
+            else if($request->has('step') && $request->step == 2)
+            {
+                $input = $request->input();
+                //=======================
+                // Check
+                //=======================
+                $resourceModel = new Resource();
+                $check = $resourceModel->where('id', $input['id'])->where('user_id', $userInfo['id'])->get()->first();
+                if($check != null){
+                    $resourceModel = new Resource();
+                    $resourceModel->where('id', $input['id'])->where('user_id', $userInfo['id'])->update([
+                        'category_id' => $input['category_id'],
+                        'title' => $input['title'],
+                        'review' => $input['review'],
+                        'content' => $input['content'],
+                        'attachment' => '',
+                    ]);
+                    $rv = array(
+                        'status' => 2000,
+                        'data' => 'Resource has been updated successfully'
+                    );
+                    return json_encode($rv, true);
+                } else {
+                    $rv = array(
+                        'status' => 5000,
+                        'data' => 'Invalid Request'
+                    );
+                    return json_encode($rv, true);
+                }
+            }
+            else if($request->has('step') && $request->step == 3)
+            {
+                $input = $request->input();
+                $request->validate([
+                    'attach' => 'required|mimes:pdf,doc,docx,ppt,pptx,rtf,txt|max:3000',
+                ], [], ['ARCHIVO' => 'ARCHIVO']);
+                //=======================
+                // Check
+                //=======================
+                $resourceModel = new Resource();
+                $check = $resourceModel->where('id', $input['id'])->where('user_id', $userInfo['id'])->get()->first();
+                if($check != null){
+                    if($request->hasFile('attach')){
+                        $file_name = time().'.'.$request->attach->extension();
+                        $uploads = public_path('uploads/');
+                        $request->attach->move($uploads, $file_name);
+                    } else {
+                        $rv = array(
+                            'status' => 5000,
+                            'data' => 'Invalid Request'
+                        );
+                        return json_encode($rv, true);
+                    }
+
+                    $resourceModel = new Resource();
+                    $resourceModel->where('id', $input['id'])->where('user_id', $userInfo['id'])->update([
+                        'category_id' => $input['category_id'],
+                        'title' => $input['title'],
+                        'review' => $input['review'],
+                        'content' => $input['content'],
+                        'attachment' => $file_name,
+                    ]);
+                    $rv = array(
+                        'status' => 2000,
+                        'data' => 'Resource has been updated successfully'
+                    );
+                    return json_encode($rv, true);
+                } else {
+                    $rv = array(
+                        'status' => 5000,
+                        'data' => 'Invalid Request'
+                    );
+                    return json_encode($rv, true);
+                }
+            }
+        } else {
+            $rv = array(
+                'status' => 5000,
+                'data' => 'Authentication failed.'
+            );
+            return json_encode($rv, true);
+        }
+    }
+
     /**
      * Display the specified resource.
      *
@@ -413,6 +523,58 @@ class ResourceController extends Controller
     private function toSlug($string)
     {
         return strtolower(preg_replace('/[\s-]/', '_', $string));
+    }
+
+
+    public function remove(Request $request){
+        if(Auth::check()) {
+            $userInfo = Auth::user();
+            $input = $request->input();
+            $validator = Validator::make($input, [
+                'id' => 'required'
+            ]);
+            if($validator->fails()){
+                $rv = array(
+                    "status" => 5000,
+                    "data" => $validator->messages()
+                );
+                return json_encode($rv, true);
+            }
+            //=================
+            // Check
+            //=================
+            $resourseModel = new Resource();
+            $check = $resourseModel
+                ->where('id', $input['id'])
+                ->where('user_id', $userInfo['id'])
+                ->get()->first();
+            if($check != null){
+                $resourseModel = new Resource();
+                $resourseModel
+                    ->where('id', $input['id'])
+                    ->where('user_id', $userInfo['id'])
+                    ->delete();
+                $rv = array(
+                    'status' => 2000,
+                    'data' => 'Resource has been removed successfully'
+                );
+                return json_encode($rv, true);
+
+            } else {
+                $rv = array(
+                    'status' => 5000,
+                    'data' => 'Invalid Request'
+                );
+                return json_encode($rv, true);
+            }
+
+        } else {
+            $rv = array(
+                'status' => 5000,
+                'data' => 'Authentication failed.'
+            );
+            return json_encode($rv, true);
+        }
     }
 
 }

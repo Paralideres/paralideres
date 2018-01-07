@@ -13110,7 +13110,7 @@ span.cat-10 {
 .login_content {
 
 }
-#create_resource_form{
+#create_resource_form,#edit_resource_form{
     max-width: 665px;
     margin: 0 auto;
     background: #fff;
@@ -14189,4 +14189,10 @@ span.has-error {
     height: 15px;
     border-radius: 50%;
     background: #688391;
+}
+/*========================*/
+/*   Edit Remove   */
+/*========================*/
+.cursorPointer{
+    cursor: pointer;
 }
