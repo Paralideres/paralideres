@@ -8,8 +8,34 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- TITLE -->
-    <title>{{ config('app.name', 'Laravel') }}</title>
-    <meta name="description" content="">
+    @if(isset($resource->title))
+        <title>{{ $resource->title }} - {{$author['username']}}</title>
+    @else
+        <title>{{ config('app.name', 'Laravel') }}</title>
+    @endif
+    @if(isset($resource->review))
+        <meta name="description" content="{{$resource->review}}">
+    @else
+        <meta name="description" content="">
+    @endif
+    @if(isset($resource->category->id))
+        @if($resource->category->id == 9 || $resource->category->id == 11 || $resource->category->id ==12)
+            <meta name="og:image"
+                  content="{{asset('images/icon/cat-icon-12.png')}}">
+            <meta name="og:image:secure_url"
+                  content="{{asset('images/icon/cat-icon-12.png')}}">
+        @else
+            <meta name="og:image"
+                  content="{{asset('images/icon/cat-icon-'.$resource->category->id.'.png')}}">
+            <meta name="og:image:secure_url"
+                  content="{{asset('images/icon/cat-icon-'.$resource->category->id.'.png')}}">
+        @endif
+    @else
+        <meta name="og:image"
+              content="">
+        <meta name="og:image:secure_url"
+              content="">
+    @endif
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="{{asset('apple-touch-icon.png')}}">
     <link href="{{ asset('css/app.css') }}?paralideres={{uniqid()}}" rel="stylesheet">
@@ -93,14 +119,16 @@
                         </div>
                         <div class="input_content clearfix" :class="{'has-error':errors1.review}">
                             <label>RESEÑA O RESUME</label>
-                            <textarea name="review" id="" required cols="30" rows="10" class="noMargin" v-model="recurso.description"></textarea>
+                            <textarea name="review" id="" required cols="30" rows="10" class="noMargin"
+                                      v-model="recurso.description"></textarea>
                             <p class="custom-err-msg">
                                 <span v-if="errors1.review" v-text="errors1.review[0]"></span>
                             </p>
                         </div>
                         <div class="input_content clearfix" :class="{'has-error':errors1.category_id}">
                             <label>CATEGORIA</label>
-                            <select name="category_id" class="noMargin" required v-model="recurso.cat_id" v-on:change="categorySelect">
+                            <select name="category_id" class="noMargin" required v-model="recurso.cat_id"
+                                    v-on:change="categorySelect">
                                 <option value="">...SELECT CATEGORIA...</option>
                                 @if(isset($popup_categories))
                                     @foreach($popup_categories as $category)
@@ -237,7 +265,7 @@
                 </div>
             </div>
         </form>
-        <div class="sr-overlay"></div>        
+        <div class="sr-overlay"></div>
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{asset('js/resource_create.js')}}?js={{uniqid()}}"></script>
