@@ -338,6 +338,14 @@ class ResourceController extends Controller
                 $resourceModel = new Resource();
                 $check = $resourceModel->where('id', $input['id'])->where('user_id', $userInfo['id'])->get()->first();
                 if($check != null){
+                    $removeTag = DB::table('resource_tag')->where('resource_id', $input['id'])->delete();
+                    if(count($input['tag_ids']) > 0){
+                        foreach ($input['tag_ids'] as $tag_id){
+                            DB::table('resource_tag')->insert(
+                                ['resource_id' => $input['id'], 'tag_id' => $tag_id, 'created_at' => Carbon::now()]
+                            );
+                        }
+                    }
                     $resourceModel = new Resource();
                     $resourceModel->where('id', $input['id'])->where('user_id', $userInfo['id'])->update([
                         'category_id' => $input['category_id'],
@@ -362,9 +370,11 @@ class ResourceController extends Controller
             else if($request->has('step') && $request->step == 3)
             {
                 $input = $request->input();
-                $request->validate([
-                    'attach' => 'required|mimes:pdf,doc,docx,ppt,pptx,rtf,txt|max:3000',
-                ], [], ['ARCHIVO' => 'ARCHIVO']);
+                if($request->hasFile('attach')){
+                    $request->validate([
+                        'attach' => 'required|mimes:pdf,doc,docx,ppt,pptx,rtf,txt|max:3000',
+                    ], [], ['ARCHIVO' => 'ARCHIVO']);
+                }
                 //=======================
                 // Check
                 //=======================
@@ -376,13 +386,16 @@ class ResourceController extends Controller
                         $uploads = public_path('uploads/');
                         $request->attach->move($uploads, $file_name);
                     } else {
-                        $rv = array(
-                            'status' => 5000,
-                            'data' => 'Invalid Request'
-                        );
-                        return json_encode($rv, true);
+                        $file_name = $check->attachment;
                     }
-
+                    $removeTag = DB::table('resource_tag')->where('resource_id', $input['id'])->delete();
+                    if(count($input['tag_ids']) > 0){
+                        foreach ($input['tag_ids'] as $tag_id){
+                            DB::table('resource_tag')->insert(
+                                ['resource_id' => $input['id'], 'tag_id' => $tag_id, 'created_at' => Carbon::now()]
+                            );
+                        }
+                    }
                     $resourceModel = new Resource();
                     $resourceModel->where('id', $input['id'])->where('user_id', $userInfo['id'])->update([
                         'category_id' => $input['category_id'],
