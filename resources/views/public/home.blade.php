@@ -167,10 +167,10 @@
                 </div>
                 <div class="col-md-12 clearfix text-center">
                     <div class="service_btn">
-                        <a href="#" v-if="resources.next_page_url"
+                        <a v-if="resources.next_page_url"
                            v-on:click.prevent="getNextResources(resources.next_page_url)">ver mus recursus</a>
-                        <a href="#" v-else v-on:click.prevent="getNextResources(resources.prev_page_url)">ver mus
-                            recursus</a>
+                        <a v-else
+                           v-on:click.prevent="getNextResources(resources.prev_page_url)">ver mus recursusc</a>
                     </div>
                 </div>
 
@@ -187,6 +187,13 @@
         <section class="service_area form_hide_d">
             <div class="container">
                 <div class="row">
+                    <div class="col-md-12" v-if="resources.data.length == 0">
+                        <br>
+                        <div class="well">
+                            <h4 class="text-center text-danger">No Resource found. Please try another filter.</h4>
+                        </div>
+                        <br>
+                    </div>
                     <div class="col-md-4 no-padding" v-for="(resource_info, index) in resources.data">
                         <div class="service_inner_m">
                         <span>

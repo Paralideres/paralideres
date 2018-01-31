@@ -123,14 +123,18 @@ class ResourceController extends Controller
     public function search(Request $request)
     {
         // Create Request to Handle this limit Type
-        $limit = intval($request->limit);
-        $limit = $limit > 0 && $limit < 20 ? $limit : 20;
+//        $limit = intval($request->limit);
+//        $limit = $limit > 0 && $limit < 20 ? $limit : 20;
+        $pageNo = isset($request->pageNo) ? $request->pageNo : 1;
+        $limit = 1;
+        $skip = ($pageNo - 1)*$limit;
 
         $rv = array();
         $resourceModel = new Resource();
         $data = $resourceModel
             ->where('title','like','%'.$request->search.'%')
             ->take($limit)
+            ->skip($skip)
             ->orderBy('created_at', 'desc')
             ->get()->toArray();
         if(count($data) > 0){

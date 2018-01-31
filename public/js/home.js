@@ -11,7 +11,8 @@ $(document).ready(function () {
             },
             checkedAnswer: 0,
             poll: [],
-            pollResult: false
+            pollResult: false,
+            pagination: 2
         },
         created: function () {
             this.getResources();
@@ -39,15 +40,25 @@ $(document).ready(function () {
                         THIS.$common.loadingHide(0);
                     });
             },
-            getNextResources: function (next_page_url) {
+            getNextResources: function () {
+                var THIS = this;
+                THIS.$common.loadingShow(0);
+                var action_url = '/search?pageNo=' + THIS.pagination;
+                axios.get(this.api_url + 'resources' + action_url)
+                    .then(function (response) {
+                        THIS.pagination = THIS.pagination + 1;
+                        THIS.resources.data = response.data;
+                        THIS.$common.loadingHide(0);
+                    });
+                /*alert(next_page_url);
                 var THIS = this;
                 THIS.$common.loadingShow(0);
                 axios.get(next_page_url).then(function (response) {
                     THIS.resources = response.data.data;
                     THIS.$common.loadingHide(0);
-                });
+                });*/
 
-                $('html, body').animate({scrollTop: 0}, 500);
+                $('html, body').animate({scrollTop: 200}, 500);
             },
             getCategoryResources: function (slug) {
                 var THIS = this;
