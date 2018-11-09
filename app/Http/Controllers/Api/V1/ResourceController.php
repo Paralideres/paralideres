@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Resource;
+use App\Models\Category;
+use App\Models\User;
 use App\Models\Like;
 use App\Models\Collection;
 use App\Models\Tag;
+use App\Models\Resource_tag;
 
 
+use Carbon\Carbon;
 use Storage;
 use DB;
 use App\Service\CommonService;
@@ -19,6 +23,7 @@ use App\Http\Requests\Resource\ResourceDeleteRequest;
 use App\Http\Requests\Resource\ResourceUploadRequest;
 use App\Http\Requests\Resource\ResourceUpdateRequest;
 use App\Http\Requests\Resource\ResourceAddToCollectionRequest;
+use Illuminate\Support\Facades\Validator;
 
 class ResourceController extends Controller
 {
@@ -56,17 +61,36 @@ class ResourceController extends Controller
         $tag_id = ($request->has('tag_id'))?$request->tag_id:null;
         $tag_slug = ($request->has('tag_slug'))?$request->tag_slug:null;
         $category_id = ($request->has('category_id'))?$request->category_id:null;
+        $author = ($request->has('author'))?$request->author:null;
+        $author_id = 0;
         if($request->has('cat_slug') && !empty($request->cat_slug)){
             $category_id = DB::table('categories')->where('slug',$request->cat_slug)->pluck('id');
         }
+        if($request->has('author') && !empty($request->author)){
+            $authorInfo = DB::table('users')->select('id')->where('username',$author)->where('is_active', 1)->get('id')->toArray();
+            if(count($authorInfo) > 0){
+                $author_id = $authorInfo[0]->id;
+            }
+        }
         $search_text = ($request->has('search_text'))?$request->search_text:null;
-
-        $resources = Resource::select('resources.*')->with(
-            ['likesCount', 'category', 'user',
-                'like' => function($q)use($user_id){
-                    $q->where('user_id', $user_id);
-                }
-            ]);
+        if($author != null){
+            $resources = Resource::select('resources.*')
+                ->where('resources.user_id', $author_id)
+                ->with(
+                    ['likesCount', 'category', 'user',
+                        'like' => function($q)use($user_id){
+                            $q->where('user_id', $user_id);
+                        }
+                    ]);
+        } else {
+            $resources = Resource::select('resources.*')
+                ->with(
+                    ['likesCount', 'category', 'user',
+                        'like' => function($q)use($user_id){
+                            $q->where('user_id', $user_id);
+                        }
+                    ]);
+        }
         if(!empty($tag_id) || !empty($tag_slug)){
             $resources->join('resource_tag', 'resource_tag.resource_id', '=', 'resources.id')
                 ->join('tags', 'tags.id', '=', 'resource_tag.tag_id')
@@ -99,14 +123,70 @@ class ResourceController extends Controller
     public function search(Request $request)
     {
         // Create Request to Handle this limit Type
-        $limit = intval($request->limit);
-        $limit = $limit > 0 && $limit < 20 ? $limit : 20;
+//        $limit = intval($request->limit);
+//        $limit = $limit > 0 && $limit < 20 ? $limit : 20;
+        $pageNo = isset($request->pageNo) ? $request->pageNo : 1;
+        $limit = 1;
+        $skip = ($pageNo - 1)*$limit;
 
-        $resources = Resource::with('likesCount', 'category', 'user')
+        $rv = array();
+        $resourceModel = new Resource();
+        $data = $resourceModel
+            ->where('title','like','%'.$request->search.'%')
+            ->take($limit)
+            ->skip($skip)
+            ->orderBy('created_at', 'desc')
+            ->get()->toArray();
+        if(count($data) > 0){
+            foreach ($data as $recurso){
+                $eachRecurso = $recurso;
+                $eachRecurso['category'] = array();
+                $CategoryModel = new Category();
+                $CategoryInfo = $CategoryModel->where('id', $eachRecurso['category_id'])
+                    ->get()->toArray();
+                if(count($CategoryInfo) > 0){
+                    $eachRecurso['category'] = $CategoryInfo[0];
+                }
+                $eachRecurso['user'] = array();
+                $userModel = new User();
+                $userInfo = $userModel->select('id','username')->where('id', $eachRecurso['user_id'])
+                    ->get()->toArray();
+                if(count($userInfo) > 0){
+                    $userInfo[0]['image'] = null;
+                    $userInfo[0]['fullname'] = null;
+                    $eachRecurso['user'] = $userInfo[0];
+                }
+                $likeModel = new Like();
+                $totalLike = $likeModel->where('resource_id', $eachRecurso['id'])->count();
+                $eachRecurso['likes_count'] = array(
+                    "resource_id" => $eachRecurso['id'],
+                    "total" => $totalLike
+                );
+                $eachRecurso['like'] = array();
+                $totalLike = $likeModel->where('resource_id', $eachRecurso['id'])->where('user_id', $eachRecurso['user_id'])->count();
+                if($totalLike > 0){
+                    $eachRecurso['like'] = array(
+                        "resource_id" => $eachRecurso['id'],
+                        "user_id" => $eachRecurso['user_id']
+                    );
+                }
+
+                if(count($userInfo) > 0){
+                    $userInfo[0]['image'] = null;
+                    $userInfo[0]['fullname'] = null;
+                    $eachRecurso['user'] = $userInfo[0];
+                }
+                $rv[] = $eachRecurso;
+            }
+        }
+        return json_encode($rv, true);
+
+
+        /*$resources = Resource::with('likesCount', 'category', 'user')
             ->where('title','like','%'.$request->search.'%')
             ->orderBy('created_at', 'desc')
-            ->Paginate($limit);
-        return $this->setResponse($resources,'success','OK','200','','');
+            ->Paginate($limit);*/
+//        return $this->setResponse($resources,'success','OK','200','','');
     }
 
 
@@ -177,7 +257,7 @@ class ResourceController extends Controller
         else if($request->has('step') && $request->step == 3)
         {
             $request->validate([
-                'attach' => 'required|mimes:pdf,doc,docs,ppt,pptx,rtf,txt|max:3000',
+                'attach' => 'required|mimes:pdf,doc,docx,ppt,pptx,rtf,txt|max:3000',
             ], [], ['ARCHIVO' => 'ARCHIVO']);
 
             $resource = new Resource([
@@ -228,6 +308,126 @@ class ResourceController extends Controller
         }
 
 
+    }
+
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function updateRecurso(Request $request)
+    {
+        if(Auth::check()) {
+            $userInfo = Auth::user();
+            $input = $request->input();
+            if($request->has('step') && $request->step == 1){
+                $request->validate([
+                    'title' => 'required|max:100',
+                    'review' => 'required|max:300',
+                    'category_id' => 'exists:categories,id',
+                ], [], [
+                    'title' => 'TITULO RECURSO',
+                    'review' => 'RESEÑA O RESUME',
+                    'category_id' => 'CATEGORIA',
+                ]);
+                return $this->setResponse([],'success','OK','200','','');
+            }
+            else if($request->has('step') && $request->step == 2)
+            {
+                $input = $request->input();
+                //=======================
+                // Check
+                //=======================
+                $resourceModel = new Resource();
+                $check = $resourceModel->where('id', $input['id'])->where('user_id', $userInfo['id'])->get()->first();
+                if($check != null){
+                    $removeTag = DB::table('resource_tag')->where('resource_id', $input['id'])->delete();
+                    if(count($input['tag_ids']) > 0){
+                        foreach ($input['tag_ids'] as $tag_id){
+                            DB::table('resource_tag')->insert(
+                                ['resource_id' => $input['id'], 'tag_id' => $tag_id, 'created_at' => Carbon::now()]
+                            );
+                        }
+                    }
+                    $resourceModel = new Resource();
+                    $resourceModel->where('id', $input['id'])->where('user_id', $userInfo['id'])->update([
+                        'category_id' => $input['category_id'],
+                        'title' => $input['title'],
+                        'review' => $input['review'],
+                        'content' => $input['content'],
+                        'attachment' => '',
+                    ]);
+                    $rv = array(
+                        'status' => 2000,
+                        'data' => 'Resource has been updated successfully'
+                    );
+                    return json_encode($rv, true);
+                } else {
+                    $rv = array(
+                        'status' => 5000,
+                        'data' => 'Invalid Request'
+                    );
+                    return json_encode($rv, true);
+                }
+            }
+            else if($request->has('step') && $request->step == 3)
+            {
+                $input = $request->input();
+                if($request->hasFile('attach')){
+                    $request->validate([
+                        'attach' => 'required|mimes:pdf,doc,docx,ppt,pptx,rtf,txt|max:3000',
+                    ], [], ['ARCHIVO' => 'ARCHIVO']);
+                }
+                //=======================
+                // Check
+                //=======================
+                $resourceModel = new Resource();
+                $check = $resourceModel->where('id', $input['id'])->where('user_id', $userInfo['id'])->get()->first();
+                if($check != null){
+                    if($request->hasFile('attach')){
+                        $file_name = time().'.'.$request->attach->extension();
+                        $uploads = public_path('uploads/');
+                        $request->attach->move($uploads, $file_name);
+                    } else {
+                        $file_name = $check->attachment;
+                    }
+                    $removeTag = DB::table('resource_tag')->where('resource_id', $input['id'])->delete();
+                    if(count($input['tag_ids']) > 0){
+                        foreach ($input['tag_ids'] as $tag_id){
+                            DB::table('resource_tag')->insert(
+                                ['resource_id' => $input['id'], 'tag_id' => $tag_id, 'created_at' => Carbon::now()]
+                            );
+                        }
+                    }
+                    $resourceModel = new Resource();
+                    $resourceModel->where('id', $input['id'])->where('user_id', $userInfo['id'])->update([
+                        'category_id' => $input['category_id'],
+                        'title' => $input['title'],
+                        'review' => $input['review'],
+                        'content' => $input['content'],
+                        'attachment' => $file_name,
+                    ]);
+                    $rv = array(
+                        'status' => 2000,
+                        'data' => 'Resource has been updated successfully'
+                    );
+                    return json_encode($rv, true);
+                } else {
+                    $rv = array(
+                        'status' => 5000,
+                        'data' => 'Invalid Request'
+                    );
+                    return json_encode($rv, true);
+                }
+            }
+        } else {
+            $rv = array(
+                'status' => 5000,
+                'data' => 'Authentication failed.'
+            );
+            return json_encode($rv, true);
+        }
     }
 
     /**
@@ -340,6 +540,58 @@ class ResourceController extends Controller
     private function toSlug($string)
     {
         return strtolower(preg_replace('/[\s-]/', '_', $string));
+    }
+
+
+    public function remove(Request $request){
+        if(Auth::check()) {
+            $userInfo = Auth::user();
+            $input = $request->input();
+            $validator = Validator::make($input, [
+                'id' => 'required'
+            ]);
+            if($validator->fails()){
+                $rv = array(
+                    "status" => 5000,
+                    "data" => $validator->messages()
+                );
+                return json_encode($rv, true);
+            }
+            //=================
+            // Check
+            //=================
+            $resourseModel = new Resource();
+            $check = $resourseModel
+                ->where('id', $input['id'])
+                ->where('user_id', $userInfo['id'])
+                ->get()->first();
+            if($check != null){
+                $resourseModel = new Resource();
+                $resourseModel
+                    ->where('id', $input['id'])
+                    ->where('user_id', $userInfo['id'])
+                    ->delete();
+                $rv = array(
+                    'status' => 2000,
+                    'data' => 'Resource has been removed successfully'
+                );
+                return json_encode($rv, true);
+
+            } else {
+                $rv = array(
+                    'status' => 5000,
+                    'data' => 'Invalid Request'
+                );
+                return json_encode($rv, true);
+            }
+
+        } else {
+            $rv = array(
+                'status' => 5000,
+                'data' => 'Authentication failed.'
+            );
+            return json_encode($rv, true);
+        }
     }
 
 }

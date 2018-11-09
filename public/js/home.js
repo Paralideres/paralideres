@@ -6,10 +6,13 @@ $(document).ready(function () {
             base_url: window.base_url,
             img_path: window.img_path,
             api_url: window.api_url,
-            resources: [],
+            resources: {
+                data : []
+            },
             checkedAnswer: 0,
             poll: [],
-            pollResult: false
+            pollResult: false,
+            pagination: 2
         },
         created: function () {
             this.getResources();
@@ -23,28 +26,39 @@ $(document).ready(function () {
         methods: {
             getResources: function (search, value) {
                 var THIS = this;
+                console.log(search);
                 THIS.$common.loadingShow(0);
-                if (search != null) {
-                    var action_url = '/' + search + '?search=' + value;
+                if (value !== undefined) {
+                    var action_url = '/search?search=' + value;
                 } else {
-                    var action_url = '';
+                    var action_url = '/search?search=';
                 }
 
                 axios.get(this.api_url + 'resources' + action_url)
                     .then(function (response) {
-                        THIS.resources = response.data.data;
+                        THIS.resources.data = response.data;
                         THIS.$common.loadingHide(0);
                     });
             },
-            getNextResources: function (next_page_url) {
+            getNextResources: function () {
+                var THIS = this;
+                THIS.$common.loadingShow(0);
+                var action_url = '/search?pageNo=' + THIS.pagination;
+                axios.get(this.api_url + 'resources' + action_url)
+                    .then(function (response) {
+                        THIS.pagination = THIS.pagination + 1;
+                        THIS.resources.data = response.data;
+                        THIS.$common.loadingHide(0);
+                    });
+                /*alert(next_page_url);
                 var THIS = this;
                 THIS.$common.loadingShow(0);
                 axios.get(next_page_url).then(function (response) {
                     THIS.resources = response.data.data;
                     THIS.$common.loadingHide(0);
-                });
+                });*/
 
-                $('html, body').animate({scrollTop: 0}, 500);
+                $('html, body').animate({scrollTop: 200}, 500);
             },
             getCategoryResources: function (slug) {
                 var THIS = this;
@@ -62,7 +76,7 @@ $(document).ready(function () {
 
                         if (resource.likes_count.length > 0) {
 
-                            resource.likes_count[0].total += 1;
+                            resource.likes_count[0].total = parseInt(resource.likes_count[0].total) + 1;
 
                         } else {
 
@@ -77,7 +91,7 @@ $(document).ready(function () {
 
                         if (resource.likes_count.length > 0) {
 
-                            resource.likes_count[0].total -= 1;
+                            resource.likes_count[0].total = parseInt(resource.likes_count[0].total) - 1;
 
                         } else {
 
@@ -100,31 +114,36 @@ $(document).ready(function () {
             },
             votePoll: function () {
                 var THIS = this;
-                var formID = document.querySelector('#votePoll');
-                var formData = new FormData(formID);
-                this.$common.loadingShow(0);
-                axios.post(THIS.base_url + THIS.api_url + 'polls/' + THIS.poll.id + '/vote', {
-                    'option': formData.get('poll_option')
-                }).then(function (response) {
-                    if(response.data.data.status === 2000){
+                var formID = $('#votePoll');
+                var option = formID.find('input:radio[name="poll_option"]:checked').val();
+                var formData = {
+                    option: option
+                };
+                THIS.$common.loadingShow(0);
+                axios.post(THIS.base_url + THIS.api_url + 'polls/' + THIS.poll.id + '/vote', formData)
+                    .then(function (response) {
                         THIS.$common.loadingHide(0);
-                        THIS.pollResult = true;
-                        THIS.poll = response.data.data.poll;
-                        THIS.$common.showMessage(response.data);
-                        THIS.checkedAnswer = formData.get('poll_option');
-                    } else if(response.data.data.status === 3000){
+                        if (response.data.data.status === 2000) {
+                            THIS.pollResult = true;
+                            THIS.poll = response.data.data.poll;
+                            THIS.$common.showMessage(response.data);
+                        } else if (response.data.data.status === 3000) {
+                            THIS.pollResult = true;
+                            THIS.poll = response.data.data.poll;
+                            THIS.$common.showMessage(response.data);
+                            if(response.data.data.has !== undefined){
+                                THIS.checkedAnswer = response.data.data.has;
+                            } else {
+                                THIS.checkedAnswer = parseInt(option);
+                            }
+                        }
+                    })
+                    .catch(function (error) {
                         THIS.$common.loadingHide(0);
-                        THIS.pollResult = true;
-                        THIS.poll = response.data.data.poll;
-                        THIS.$common.showMessage(response.data);
-                        THIS.checkedAnswer = response.data.data.has;
-                    }
-                }).catch(function (response) {
-                    this.$common.loadingHide(0);
-                    if (error.response.status == 500 && error.response.data.code == 500) {
-                        THIS.$common.showMessage(error);
-                    }
-                });
+                        if (error.response.status === 500 && error.response.data.code === 500) {
+                            THIS.$common.showMessage(error);
+                        }
+                    });
 
             },
         }
