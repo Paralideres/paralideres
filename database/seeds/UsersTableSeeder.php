@@ -16,7 +16,8 @@ class UsersTableSeeder extends Seeder
             'username' => 'jorge',
             'email' => 'jorge@paralideres.org',
             'password' => bcrypt('test123'),
-            'verified' => true
+            'is_active' => true,
+            'activation_token' => bcrypt('token')
         ]);
 
         $user = DB::table('users')->where('username', 'jorge')->first();
