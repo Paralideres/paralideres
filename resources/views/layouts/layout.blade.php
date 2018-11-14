@@ -55,7 +55,7 @@
     <script>
         window.asset = '{{env("APP_URL")}}/';
         window.base_url = '{{env("APP_URL")}}/';
-        window.img_path = '{{env("APP_URL")}}/public';
+        window.img_path = '{{env("APP_URL")}}/';
         window.api_url = 'api/v1/';
     </script>
 </head>
@@ -301,7 +301,6 @@
         var author = $(".author").outerHeight();
         var comment = $(".comment").outerHeight();
         var minheight = service_head + author + comment;
-        console.log(minheight);
 
         var height1 = $(".service_inner > p").map(function () {
                 return $(this).height();
@@ -318,7 +317,6 @@
         maxHeight = maxHeight1 + maxHeight2;
 
         totalheight = minheight + maxHeight + "px";
-        console.log(totalheight);
         $(".service_inner").css("min-height", totalheight);
     });
 </script>

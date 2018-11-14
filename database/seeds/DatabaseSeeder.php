@@ -21,9 +21,9 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesAndPermissionsSeeder::class);
 
         // Default Factory
-        factory(App\Models\User::class, 10)->create();
-        factory(App\Models\Category::class, 5)->create();
-        factory(App\Models\Collection::class, 50)->create();
-        factory(App\Models\Resource::class, 100)->create();
+        // factory(App\Models\User::class, 10)->create();
+        // factory(App\Models\Category::class, 5)->create();
+        // factory(App\Models\Collection::class, 50)->create();
+        // factory(App\Models\Resource::class, 100)->create();
     }
 }
