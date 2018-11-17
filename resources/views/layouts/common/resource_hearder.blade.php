@@ -24,7 +24,7 @@
 
                     <li><a href="{{url('/')}}">inicio</a></li>
 
-                    <li><a href="{{url('recursos')}}">recursos</a></li>
+                    <li><a href="{{url('resources')}}">recursos</a></li>
 
                     @if($auth)
 
@@ -54,14 +54,14 @@
 
             <div class="home_login">
 
-                <a href="{{url('ingreser')}}">Ingresar</a>
+                <a href="{{url('login')}}">Ingresar</a>
 
             </div>
 
             @endif
             <div class="filter">
                 <div class="filter_content">
-                    <form action="{{url('/recursos')}}">
+                    <form action="{{url('/resources')}}">
                         <select name="tag">
                             <option value="">...filter...</option>
                             @foreach($tags as $tag)

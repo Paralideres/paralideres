@@ -38,7 +38,7 @@
                     </div>
                     <p><a href="{{url('/password-reset')}}">Olvide mi contrasena</a></p>
                     <button type="submit">Ingresar</button>
-                    <span>No tengo cuenta en Paralideres.org, <a href="{{url('/registrarme')}}">Registrarme</a></span>
+                    <span>No tengo cuenta en Paralideres.org, <a href="{{url('/register')}}">Registrarme</a></span>
                 </form>
             @elseif(isset($data) && $data['status'] == 5000)
                 <h4 class="text-center text-danger">{{$data['msg']}}</h4>
@@ -62,7 +62,7 @@
                     </div>
                     <p><a href="{{url('/password-reset')}}">Olvide mi contrasena</a></p>
                     <button type="submit">Ingresar</button>
-                    <span>No tengo cuenta en Paralideres.org, <a href="{{url('/registrarme')}}">Registrarme</a></span>
+                    <span>No tengo cuenta en Paralideres.org, <a href="{{url('/register')}}">Registrarme</a></span>
                 </form>
             @endif
         </div>

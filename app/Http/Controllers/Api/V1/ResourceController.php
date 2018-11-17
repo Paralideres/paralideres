@@ -126,7 +126,7 @@ class ResourceController extends Controller
 //        $limit = intval($request->limit);
 //        $limit = $limit > 0 && $limit < 20 ? $limit : 20;
         $pageNo = isset($request->pageNo) ? $request->pageNo : 1;
-        $limit = 1;
+        $limit = 12;
         $skip = ($pageNo - 1)*$limit;
 
         $rv = array();
