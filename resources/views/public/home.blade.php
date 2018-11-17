@@ -58,7 +58,7 @@
                 {{--<input type="password" class="form-control" v-on:keyup="login('login_form','')" placeholder="Ingresa una clave">--}}
                 {{--</div>--}}
                 {{--<div class="col-sm-3">--}}
-                {{--<button type="button" id="contact_submit" :disabled="submitDisable" class="btn btn-dm form_hide_m">INGRESER</button>--}}
+                {{--<button type="button" id="contact_submit" :disabled="submitDisable" class="btn btn-dm form_hide_m">INGRESAR</button>--}}
                 {{--</div>--}}
                 {{--<button type="button" id="contact_submit " class="btn btn-dm m_submit form_hide_d"><img src="images/submit-arrow.png" alt=""></button>--}}
                 {{--</form>--}}
@@ -126,11 +126,11 @@
                                     <img v-else-if="resource_info.category"
                                          :src="img_path+'/images/icon/cat-icon-'+resource_info.category.id+'.png'"
                                          alt="">
-                                    <span><a :href="base_url+'recursos?category='+resource_info.category.slug"
+                                    <span><a :href="base_url+'resources?category='+resource_info.category.slug"
                                              v-text="resource_info.category.label"></a></span>
                                 </h2>
                             </div>
-                            <h4><a :href="base_url+'recursos/'+resource_info.slug" v-text="resource_info.title"></a></h4>
+                            <h4><a :href="base_url+'resources/'+resource_info.slug" v-text="resource_info.title"></a></h4>
                             <p v-html="resource_info.review.substr(0, 200) + '...'"></p>
                             <div class="author">
                                 <h3>
@@ -138,16 +138,16 @@
                                          :src="asset+'uploads/'+resource_info.user.image" alt="">
                                     <img width="45px" class="img-circle" v-else :src="img_path+'/images/user.png'"
                                          alt="">
-                                    author: <a :href="base_url+'recursos?author='+resource_info.user.username"
+                                    author: <a :href="base_url+'resources?author='+resource_info.user.username"
                                                v-text="resource_info.user.fullname || resource_info.user.username"></a>
                                 </h3>
                             </div>
                             <div class="comment">
-                                <span><a :href="base_url+'recursos/'+resource_info.slug"><img
+                                <span><a :href="base_url+'resources/'+resource_info.slug"><img
                                                 :src="img_path+'/images/download.jpg'" alt="">Ver o Descargar recurso</a></span>
                                 <span style="cursor: pointer"
                                       @if($auth) v-on:click.prevent="givenResourceLike(resource_info)"
-                                      @else onclick="window.location.href='ingreser'" @endif>
+                                      @else onclick="window.location.href='login'" @endif>
                             <span v-if="resource_info.likes_count.length > 0"
                                   v-text="resource_info.likes_count[0].total"></span>
                             <span v-else>0</span>
@@ -202,12 +202,12 @@
                             <img v-else-if="resource_info.category"
                                  :src="img_path+'/images/icon/cat-icon-'+resource_info.category.id+'.png'" alt="">
                         </span>
-                            <h4><a :href="base_url+'recursos/'+resource_info.slug">@{{ resource_info.title}}</a></h4>
+                            <h4><a :href="base_url+'resources/'+resource_info.slug">@{{ resource_info.title}}</a></h4>
                             <h3 v-if="resource_info.user.fullname"
                                 v-text="'author : '+resource_info.user.fullname"></h3>
                             <h3 v-if="!resource_info.user.fullname"
                                 v-text="'author : '+resource_info.user.username"></h3>
-                            <a :href="base_url+'recursos/'+resource_info.slug"><img
+                            <a :href="base_url+'resources/'+resource_info.slug"><img
                                         :src="img_path+'/images/download2.png'" alt=""></a>
                         </div>
                     </div>
@@ -273,7 +273,7 @@
                                     @if($auth)
                                         <a href="#" v-on:click.prevent="votePoll">ENVIAR MI VOTO</a>
                                     @else
-                                        <a href="{{url('/ingreser?redirect=home')}}">ENVIAR MI VOTO</a>
+                                        <a href="{{url('/login?redirect=home')}}">ENVIAR MI VOTO</a>
                                     @endif
                                 </div>
                             </div>

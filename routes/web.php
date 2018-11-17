@@ -19,14 +19,14 @@ Route::prefix('/')->namespace('Web')->group(function(){
     Route::get('/account/activation/{token}', 'HomeController@activation');
 
     // resource list
-    Route::get('/recursos', 'ResourceController@index');
-    Route::get('/recursos/{slug}/download', 'ResourceController@download');
+    Route::get('/resources', 'ResourceController@index');
+    Route::get('/resources/{slug}/download', 'ResourceController@download');
 
     // show resource create form
-    Route::get('/recursos/crear', 'ResourceController@showCreate')->middleware('auth');
+    Route::get('/resources/create', 'ResourceController@showCreate')->middleware('auth');
 
     // show single resource
-    Route::get('/recursos/{slug}', 'ResourceController@show');
+    Route::get('/resources/{slug}', 'ResourceController@show');
 
 
 });
@@ -34,11 +34,11 @@ Route::prefix('/')->namespace('Web')->group(function(){
 Route::prefix('/')->namespace('Auth')->group(function(){
 
     // show web login form
-    Route::get('ingreser', 'LoginController@showLoginForm')->name('login');
+    Route::get('login', 'LoginController@showLoginForm')->name('login');
 
     // show web registration form
-    Route::get('registrarme', 'LoginController@showRegistrationForm');
-    Route::get('el_triunfo', 'LoginController@showRegistrationSuccess');
+    Route::get('register', 'LoginController@showRegistrationForm');
+    Route::get('register-ok', 'LoginController@showRegistrationSuccess');
 
     //Password Reset Routes...
     Route::get('password-reset', 'ForgotPasswordController@showLinkRequestForm');

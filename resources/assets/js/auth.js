@@ -36,7 +36,7 @@ $(document).ready(function () {
                         if (response.data) {
                             this.$common.showMessage(response.data);
                             setTimeout(function () {
-                                window.location.href = '/ingreser';
+                                window.location.href = '/login';
                             }, 500)
                         }
                     }).catch(error => {
@@ -74,9 +74,9 @@ $(document).ready(function () {
                             if(window.redirect == 'home'){
                                 var url = this.base_url;
                             }else if(window.redirect == 'resource'){
-                                var url = this.base_url+'recursos/'+window.slug;
+                                var url = this.base_url+'resources/'+window.slug;
                             }else if(window.redirect == 'resource_list'){
-                                var url = this.base_url+'recursos';
+                                var url = this.base_url+'resources';
                             }else{
                                 url = this.base_url;
                             }

@@ -35,7 +35,7 @@
                 </div>
                 <p><a href="{{url('/password-reset')}}">Olvide mi contrasena</a></p>
                 <button type="submit" :disabled="submitDisable">Registrarme</button>
-                <span>Tengo una cuenta en Paralideres.org, <a href="{{url('/ingreser')}}">Ingresar</a></span>
+                <span>Tengo una cuenta en Paralideres.org, <a href="{{url('/login')}}">Ingresar</a></span>
 
             </form>
         </div>

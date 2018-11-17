@@ -39781,10 +39781,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-/**
-* jquery-match-height 0.7.0 by @liabru
-* http://brm.io/jquery-match-height/
-* License: MIT
+/**
+
+* jquery-match-height 0.7.0 by @liabru
+
+* http://brm.io/jquery-match-height/
+
+* License: MIT
+
 */
 
 ;(function (factory) {
@@ -39813,16 +39817,21 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     }
 })(function ($) {
 
-    /*
-    *  internal
+    /*
+
+    *  internal
+
     */
 
     var _previousResizeWidth = -1,
         _updateTimeout = -1;
 
-    /*
-    *  _parse
-    *  value parse utility function
+    /*
+
+    *  _parse
+
+    *  value parse utility function
+
     */
 
     var _parse = function _parse(value) {
@@ -39832,10 +39841,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         return parseFloat(value) || 0;
     };
 
-    /*
-    *  _rows
-    *  utility function returns array of jQuery selections representing each row
-    *  (as displayed after float wrapping applied by browser)
+    /*
+
+    *  _rows
+
+    *  utility function returns array of jQuery selections representing each row
+
+    *  (as displayed after float wrapping applied by browser)
+
     */
 
     var _rows = function _rows(elements) {
@@ -39881,9 +39894,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         return rows;
     };
 
-    /*
-    *  _parseOptions
-    *  handle plugin options
+    /*
+
+    *  _parseOptions
+
+    *  handle plugin options
+
     */
 
     var _parseOptions = function _parseOptions(options) {
@@ -39916,9 +39932,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         return opts;
     };
 
-    /*
-    *  matchHeight
-    *  plugin definition
+    /*
+
+    *  matchHeight
+
+    *  plugin definition
+
     */
 
     var matchHeight = $.fn.matchHeight = function (options) {
@@ -39970,8 +39989,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         return this;
     };
 
-    /*
-    *  plugin global options
+    /*
+
+    *  plugin global options
+
     */
 
     matchHeight.version = '0.7.0';
@@ -39992,9 +40013,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
     matchHeight._parseOptions = _parseOptions;
 
-    /*
-    *  matchHeight._apply
-    *  apply matchHeight to given elements
+    /*
+
+    *  matchHeight._apply
+
+    *  apply matchHeight to given elements
+
     */
 
     matchHeight._apply = function (elements, options) {
@@ -40195,9 +40219,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         return this;
     };
 
-    /*
-    *  matchHeight._applyDataApi
-    *  applies matchHeight to all elements with a data-match-height attribute
+    /*
+
+    *  matchHeight._applyDataApi
+
+    *  applies matchHeight to all elements with a data-match-height attribute
+
     */
 
     matchHeight._applyDataApi = function () {
@@ -40228,9 +40255,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         });
     };
 
-    /*
-    *  matchHeight._update
-    *  updates matchHeight on all current groups with their correct options
+    /*
+
+    *  matchHeight._update
+
+    *  updates matchHeight on all current groups with their correct options
+
     */
 
     var _update = function _update(event) {
@@ -40287,8 +40317,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         }
     };
 
-    /*
-    *  bind events
+    /*
+
+    *  bind events
+
     */
 
     // apply on DOM ready event
@@ -40316,7 +40348,15 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 $(document).ready(function () {
 
-  /*     =========================================================================================     12. SLIDE     =========================================================================================     */
+  /*
+
+     =========================================================================================
+
+     12. SLIDE
+
+     =========================================================================================
+
+     */
 
   // var banner_slider = $("#banner_slider");
 
@@ -51866,7 +51906,7 @@ $(document).ready(function () {
                         if (response.data) {
                             _this.$common.showMessage(response.data);
                             setTimeout(function () {
-                                window.location.href = '/ingreser';
+                                window.location.href = '/login';
                             }, 500);
                         }
                     }).catch(function (error) {

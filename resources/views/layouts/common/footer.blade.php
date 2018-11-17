@@ -8,7 +8,7 @@
 
                 <div class="footer_top_link text-center">
 
-                    <a href="{{url('/recursos')}}">VER RECURSOS</a>
+                    <a href="{{url('/resources')}}">VER RECURSOS</a>
 
                     <a href="http://blog.paralideres.org">CAPACITACIÓN</a>
 
@@ -44,7 +44,7 @@
 
     </div>
 
-    <p class="footer-link">ParaLideres.org © 2014 | <a href="#">Términos</a> | <a href="#">Privacidad</a> | <a href="#">Todos los derechos reservados</a></p>
+    <p class="footer-link">ParaLideres.org © 2018 | <a href="#">Términos</a> | <a href="#">Privacidad</a> | <a href="#">Todos los derechos reservados</a></p>
 
 </footer>
 
@@ -66,7 +66,7 @@
 
                 <div class="footer_top_link text-center">
 
-                    <a href="{{url('/recursos')}}">VER RECURSOS</a>
+                    <a href="{{url('/resources')}}">VER RECURSOS</a>
 
                     <a href="#">CAPACITACIÓN</a>
 
