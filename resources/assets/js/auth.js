@@ -99,7 +99,7 @@ $(document).ready(function () {
 
 
                 logout(){
-                    axios.post(window.base_url+'/api/v1/logout')
+                    axios.post(window.base_url+'api/v1/logout')
                         .then(response => {
                             this.$common.showMessage(response.data);
                             localStorage.removeItem('access_token');
