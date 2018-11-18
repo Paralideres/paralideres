@@ -26,4 +26,4 @@ let mix = require('laravel-mix');
 //     'resources/assets/css/owl.theme.default.css'
 // ], 'public/css/app.css');
 
-mix.js('resources/assets/js/app.js', 'public/js');
+mix.js('resources/assets/js/app.js', 'public/js').version();
