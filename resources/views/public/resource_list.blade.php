@@ -19,27 +19,27 @@ $author=(isset($_GET['author']))?$_GET['author']:'';
                         <span class="num" v-if="resources.data && resources.data.length > 0" v-text="resources.total+' Recursos'"></span>
                         <span class="num" v-else> 0 Recursos</span>
                         <span>
-                                POR Etiqueta
+                                Por Etiqueta
                                 <select name="tag_id" v-on:change="filterResource">
-                                  <option value="">...filter...</option>
+                                  <option value="">Elija una Etiqueta</option>
                                   @foreach($tags as $tag)
                                         <option value="{{$tag->id}}" @if($tag_slug == $tag->slug) selected @endif>{{$tag->label}}</option>
                                   @endforeach
                                 </select>
                             </span>
                         <span>
-                                POR CATEGORIA
+                                Por Categoría
                                 <select name="category_id" v-on:change="filterResource">
-                                  <option value="">..filter..</option>
+                                  <option value="">Elija una Categoría</option>
                                   @foreach($categories as $category)
                                         <option value="{{$category->id}}" @if($cat_slug == $category->slug) selected @endif>{{$category->label}}</option>
                                   @endforeach
                                 </select>
                             </span>
                         <span class="recurso_btn">
-                                PALABRA CLAVE
+                                Por Palabra Clave
                                 <input type="text" name="search_text" v-on:keyup="filterResource" placeholder="Escribe algo aquí...">
-                                <button v-on:click.prevent="filterResource">FILTRAR</button>
+                                <button v-on:click.prevent="filterResource">Filtrar</button>
                             </span>
                     </form>
                 </div>
@@ -64,7 +64,7 @@ $author=(isset($_GET['author']))?$_GET['author']:'';
                         </h3>
                     </div>
                     <div class="comment" :class="{'comment_red': resource_info.like.length > 0}">
-                        <span><a :href="base_url+'resources/'+resource_info.slug"><img :src="img_path+'/images/download.jpg'" alt="">Ver o Descargar recurso</a></span>
+                        <span><a :href="base_url+'resources/'+resource_info.slug"><img :src="img_path+'/images/download.jpg'" alt="">Ver o Descargar Recurso</a></span>
                         <span style="cursor: pointer" @if($auth) v-on:click.prevent="givenResourceLike(resource_info)" @else onclick="window.location.href='login?redirect=resource_list'" @endif>
                             <span v-if="resource_info.likes_count.length > 0" v-text="resource_info.likes_count[0].total"></span>
                             <span v-else>0</span>
@@ -77,13 +77,13 @@ $author=(isset($_GET['author']))?$_GET['author']:'';
             <div class="col-md-12" v-if="resources.data.length == 0">
                 <br><br><br>
                 <div class="well">
-                    <h4 class="text-center text-danger">No Resource found. Please try another filter.</h4>
+                    <h4 class="text-center text-danger">Sin resultados. Intenta otra búsqueda</h4>
                 </div>
                 <br><br><br>
             </div>
             <div class="col-md-12 clearfix text-center">
                 <div class="service_btn" v-if="resources.data && resources.data.length > 0">
-                    <a href="#" v-if="resources.next_page_url" v-on:click.prevent="getNextResources(resources.next_page_url)">ver mus recursus</a>
+                    <a href="#" v-if="resources.next_page_url" v-on:click.prevent="getNextResources(resources.next_page_url)">Ver más Recursos</a>
                 </div>
             </div>
         </div>

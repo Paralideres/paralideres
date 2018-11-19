@@ -144,7 +144,7 @@
                             </div>
                             <div class="comment">
                                 <span><a :href="base_url+'resources/'+resource_info.slug"><img
-                                                :src="img_path+'/images/download.jpg'" alt="">Ver o Descargar recurso</a></span>
+                                                :src="img_path+'/images/download.jpg'" alt="">Ver o Descargar Recurso</a></span>
                                 <span style="cursor: pointer"
                                       @if($auth) v-on:click.prevent="givenResourceLike(resource_info)"
                                       @else onclick="window.location.href='login'" @endif>
@@ -160,7 +160,7 @@
                     <div class="col-md-12" v-if="resources.data.length == 0">
                         <br><br><br>
                         <div class="well">
-                            <h4 class="text-center text-danger">No Resource found. Please try another filter.</h4>
+                            <h4 class="text-center text-danger">Sin resultados. Intenta otra búsqueda.</h4>
                         </div>
                         <br><br><br>
                     </div>
@@ -168,9 +168,9 @@
                 <div class="col-md-12 clearfix text-center">
                     <div class="service_btn">
                         <a v-if="resources.next_page_url"
-                           v-on:click.prevent="getNextResources(resources.next_page_url)">ver mus recursus</a>
+                           v-on:click.prevent="getNextResources(resources.next_page_url)">Ver más Recursos</a>
                         <a v-else
-                           v-on:click.prevent="getNextResources(resources.prev_page_url)">ver mus recursusc</a>
+                           v-on:click.prevent="getNextResources(resources.prev_page_url)">Ver más Recursos</a>
                     </div>
                 </div>
 
@@ -190,7 +190,7 @@
                     <div class="col-md-12" v-if="resources.data.length == 0">
                         <br>
                         <div class="well">
-                            <h4 class="text-center text-danger">No Resource found. Please try another filter.</h4>
+                            <h4 class="text-center text-danger">Sin resultados. Intenta otra búsqueda.</h4>
                         </div>
                         <br>
                     </div>
@@ -214,9 +214,8 @@
                     <div class="col-md-12 clearfix text-center">
                         <div class="service_btn">
                             <a href="#" v-if="resources.next_page_url"
-                               v-on:click.prevent="getNextResources(resources.next_page_url)">ver mus recursus</a>
-                            <a href="#" v-else v-on:click.prevent="getNextResources(resources.prev_page_url)">ver mus
-                                recursus</a>
+                               v-on:click.prevent="getNextResources(resources.next_page_url)">Ver más Recursos</a>
+                            <a href="#" v-else v-on:click.prevent="getNextResources(resources.prev_page_url)">Ver más Recursos</a>
                         </div>
                     </div>
                 </div>
