@@ -32,13 +32,13 @@
 
                 <ul class="nav navbar-nav navbar-right">
 
-                    <li><a href="{{url('/')}}">inicio</a></li>
+                    <li><a href="{{url('/')}}">Inicio</a></li>
 
-                    <li><a href="{{url('resources')}}">recursos</a></li>
+                    <li><a href="{{url('resources')}}">Recursos</a></li>
 
                     @if($auth)
 
-                    <li><a href="#" class="open_login">crear recurso</a></li>
+                    <li><a href="#" class="open_login">Crear recurso</a></li>
 
                     @else
 
@@ -46,7 +46,7 @@
 
                     @endif
 
-                    {{--<li><a href="#">icuestas</a></li>--}}
+                    {{--<li><a href="#">Encuestas</a></li>--}}
 
                 </ul>
 
