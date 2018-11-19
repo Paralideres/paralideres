@@ -45,7 +45,9 @@ class PollController extends Controller
     {
         $monthStart = new Carbon('first day of this month');
         $monthEnd = new Carbon('last day of this month');
-        $poll = Poll::with('options')
+        $poll = Poll::with(['options' => function($query) {
+                $query->where('option', '<>', '');
+            }])
             ->orderBy('created_at', 'asc')
             ->where('active', '=', '1')
             ->whereDate('date_from', '>=', $monthStart->toDateString())
@@ -53,7 +55,9 @@ class PollController extends Controller
             ->first();
 
         if(!$poll){
-            $poll = Poll::with('options')
+            $poll = Poll::with(['options' => function($query) {
+                $query->where('option', '<>', '');
+            }])
                 ->orderBy('created_at', 'desc')
                 ->where('active', '=', '1')->first();
         }
@@ -130,7 +134,7 @@ class PollController extends Controller
         $poll = Poll::where('id',$id)->get()->toArray();
         $poll = $poll[0];
         $poll['options'] = array();
-        $options = PollOption::where('poll_id',$id)->get()->toArray();
+        $options = PollOption::where([['poll_id', $id], ['option', '<>', '']])->get()->toArray();
         foreach ($options as $p){
             $eachOption = $p;
             $eachOption['votes'] = array();
