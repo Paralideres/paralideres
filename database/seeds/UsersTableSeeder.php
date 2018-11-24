@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
             'username' => 'jorge',
             'email' => 'jorge@paralideres.org',
             'password' => bcrypt('test123'),
+            'former_pwd' => 'test123',
             'is_active' => true,
             'activation_token' => bcrypt('token')
         ]);

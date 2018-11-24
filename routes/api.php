@@ -142,4 +142,3 @@ Route::group(['prefix' => 'polls', 'namespace' => 'Api\V1'], function() {
 
     Route::resource('/', 'PollController');
 });
-

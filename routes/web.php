@@ -20,13 +20,13 @@ Route::prefix('/')->namespace('Web')->group(function(){
 
     // resource list
     Route::get('/resources', 'ResourceController@index');
-    Route::get('/resources/{slug}/download', 'ResourceController@download');
+    Route::get('/resources/{id}/{slug}/download', 'ResourceController@download');
 
     // show resource create form
     Route::get('/resources/create', 'ResourceController@showCreate')->middleware('auth');
 
     // show single resource
-    Route::get('/resources/{slug}', 'ResourceController@show');
+    Route::get('/resources/{id}/{slug}', 'ResourceController@show');
 
 
 });
