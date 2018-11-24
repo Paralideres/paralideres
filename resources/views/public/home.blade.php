@@ -99,7 +99,7 @@
                             <h2>
                                 <span>Buscador</span>
                                 <input type="search" v-on:keyup.prevent="getResources('search', $event.target.value)"
-                                       :placeholder="'Encuentra entre los '+resources.total+' recursos que tenemos'">
+                                       :placeholder="'Encuentra entre los '+resources.data.length+' recursos que tenemos'">
                             </h2>
                         </div>
                     </div>
@@ -130,7 +130,7 @@
                                              v-text="resource_info.category.label"></a></span>
                                 </h2>
                             </div>
-                            <h4><a :href="base_url+'resources/'+resource_info.slug" v-text="resource_info.title"></a></h4>
+                            <h4><a :href="base_url+'resources/'+resource_info.id+'/'+resource_info.slug" v-text="resource_info.title"></a></h4>
                             <p v-html="resource_info.review.substr(0, 200) + '...'"></p>
                             <div class="author">
                                 <h3>
@@ -143,7 +143,7 @@
                                 </h3>
                             </div>
                             <div class="comment">
-                                <span><a :href="base_url+'resources/'+resource_info.slug"><img
+                                <span><a :href="base_url+'resources/'+resource_info.id+'/'+resource_info.slug"><img
                                                 :src="img_path+'/images/download.jpg'" alt="">Ver o Descargar Recurso</a></span>
                                 <span style="cursor: pointer"
                                       @if($auth) v-on:click.prevent="givenResourceLike(resource_info)"
@@ -202,12 +202,12 @@
                             <img v-else-if="resource_info.category"
                                  :src="img_path+'/images/icon/cat-icon-'+resource_info.category.id+'.png'" alt="">
                         </span>
-                            <h4><a :href="base_url+'resources/'+resource_info.slug">@{{ resource_info.title}}</a></h4>
+                            <h4><a :href="base_url+'resources/'+resource_info_id+'/'+resource_info.slug">@{{ resource_info.title}}</a></h4>
                             <h3 v-if="resource_info.user.fullname"
                                 v-text="'author : '+resource_info.user.fullname"></h3>
                             <h3 v-if="!resource_info.user.fullname"
                                 v-text="'author : '+resource_info.user.username"></h3>
-                            <a :href="base_url+'resources/'+resource_info.slug"><img
+                            <a :href="base_url+'resources/'+resource_info.id+'/'+resource_info.slug"><img
                                         :src="img_path+'/images/download2.png'" alt=""></a>
                         </div>
                     </div>

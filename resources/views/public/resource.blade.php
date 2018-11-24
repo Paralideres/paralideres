@@ -63,7 +63,7 @@
                             </div>
                             <div class="author_desc">
                                 <h4><strong>AUTOR :</strong> <a
-                                            href="{{env('APP_URL')}}/resources?author={{$author['username']}}">{{$author['username']}}</a>
+                                            href="{{env('APP_URL')}}/resources?author={{$author['username']}}">{{$author['profile']['fullname']}}</a>
                                 </h4>
                                 <h2>RESUMEN</h2>
 
@@ -75,7 +75,7 @@
 
                                         @if($auth)
 
-                                            <span><a href="{{url('resources/'.$resource->slug.'/download')}}">Descargar Recurso</a> ( {{$resource->downloads->count()}}
+                                            <span><a href="{{url('resources/'.$resource->id.'/'.$resource->slug.'/download')}}">Descargar Recurso</a> ( {{$resource->downloads->count()}}
                                                 )</span>
 
                                         @else
@@ -178,7 +178,7 @@
                                 @foreach($latestResources as $latestResource)
                                     <h3>{{$latestResource->category->label}}</h3>
                                     <p>
-                                        <a href="{{url('resources/'.$latestResource->slug)}}">{{$latestResource->title}} </a><br>
+                                        <a href="{{url('resources/'.$latestResource->id.'/'.$latestResource->slug)}}">{{$latestResource->title}} </a><br>
                                         Agregado el {{$latestResource->created_at->format('d M Y')}}</span> </p>
                                 @endforeach
                             </div>
@@ -264,7 +264,7 @@
                                 @if($resource->attachment)
                                     <h3>
                                         @if($auth)
-                                            <span><a href="{{url('resources/'.$resource->slug.'/download')}}">Descargar Recurso</a> ( {{$resource->downloads->count()}}
+                                            <span><a href="{{url('resources/'.$resource->id.'/'.$resource->slug.'/download')}}">Descargar Recurso</a> ( {{$resource->downloads->count()}}
                                                 ) </span>
                                         @else
                                             <span>Descargar Recurso ( {{$resource->downloads->count()}} )</span>
@@ -312,7 +312,7 @@
                                 <div class="blog_content_inner">
 
                                     <h2>
-                                        <a href="{{url('resources/'.$otherResource->slug)}}">{{$otherResource->title}}</a>
+                                        <a href="{{url('resources/'.$otherResource->id.'/'.$otherResource->slug)}}">{{$otherResource->title}}</a>
                                     </h2>
 
                                     <span>PUBLICADO {{$otherResource->created_at->format('d M Y')}}</span>
@@ -376,7 +376,7 @@
                                     <div class="blog_content_inner">
 
                                         <h2>
-                                            <a href="{{url('resources/'.$otherResource->slug)}}">{{$otherResource->title}}</a>
+                                            <a href="{{url('resources/'.$otherResource->id.'/'.$otherResource->slug)}}">{{$otherResource->title}}</a>
                                         </h2>
 
                                         <span>PUBLICADO {{$otherResource->created_at->format('d M Y')}}</span>

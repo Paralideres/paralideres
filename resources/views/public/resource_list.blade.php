@@ -54,7 +54,7 @@ $author=(isset($_GET['author']))?$_GET['author']:'';
                             <span><a :href="base_url+'resources?category='+resource_info.category.slug" v-text="resource_info.category.label"></a></span>
                         </h2>
                     </div>
-                    <h4><a :href="base_url+'resources/'+resource_info.slug" v-text="resource_info.title"></a></h4>
+                    <h4><a :href="base_url+'resources/'+resource_info.id+'/'+resource_info.slug" v-text="resource_info.title"></a></h4>
                     <p v-html="resource_info.review.substr(0, 200) + '...'"></p>
                     <div class="author">
                         <h3>
@@ -64,7 +64,7 @@ $author=(isset($_GET['author']))?$_GET['author']:'';
                         </h3>
                     </div>
                     <div class="comment" :class="{'comment_red': resource_info.like.length > 0}">
-                        <span><a :href="base_url+'resources/'+resource_info.slug"><img :src="img_path+'/images/download.jpg'" alt="">Ver o Descargar Recurso</a></span>
+                        <span><a :href="base_url+'resources/'+resource_info.id+'/'+resource_info.slug"><img :src="img_path+'/images/download.jpg'" alt="">Ver o Descargar Recurso</a></span>
                         <span style="cursor: pointer" @if($auth) v-on:click.prevent="givenResourceLike(resource_info)" @else onclick="window.location.href='login?redirect=resource_list'" @endif>
                             <span v-if="resource_info.likes_count.length > 0" v-text="resource_info.likes_count[0].total"></span>
                             <span v-else>0</span>
