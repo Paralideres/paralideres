@@ -247,7 +247,7 @@
                                     <div class="author_contect">
                                         <div class="author_contect_inner">
                                             <h2>{{$resource->title}}</h2>
-                                            <iframe src="https://drive.google.com/viewerng/viewer?url={{asset('uploads/'.$resource->attachment)}}?pid=explorer&efh=false&a=v&chrome=false&embedded=true"
+                                            <iframe src="https://drive.google.com/viewerng/viewer?url={{asset('storage/resources/'.$resource->attachment)}}?pid=explorer&efh=false&a=v&chrome=false&embedded=true"
                                                     style="width:100%; height:770px">
                                             </iframe>
                                         </div>
