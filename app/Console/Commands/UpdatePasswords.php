@@ -42,8 +42,11 @@ class UpdatePasswords extends Command
             foreach ($users as $user) {
                 DB::table('users')
                     ->where('id', $user->id)
-                    ->where('password','=','former_pwd')
-                    ->update(['password' => bcrypt($user->former_pwd)]);
+                    ->whereNotNull('former_pwd')
+                    ->update([
+                        'password' => bcrypt($user->former_pwd),
+                        'former_pwd' => null
+                    ]);
             }
         });
     }
