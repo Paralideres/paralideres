@@ -202,7 +202,7 @@
                             <img v-else-if="resource_info.category"
                                  :src="img_path+'/images/icon/cat-icon-'+resource_info.category.id+'.png'" alt="">
                         </span>
-                            <h4><a :href="base_url+'resources/'+resource_info_id+'/'+resource_info.slug">@{{ resource_info.title}}</a></h4>
+                            <h4><a :href="base_url+'resources/'+resource_info.id+'/'+resource_info.slug">@{{ resource_info.title}}</a></h4>
                             <h3 v-if="resource_info.user.fullname"
                                 v-text="'author : '+resource_info.user.fullname"></h3>
                             <h3 v-if="!resource_info.user.fullname"

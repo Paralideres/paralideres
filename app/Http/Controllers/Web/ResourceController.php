@@ -80,7 +80,7 @@ class ResourceController extends WebController
 //       $headers = array('Content-Type: application/pdf',);
 //       return response()->download(public_path('uploads/'.$filename, $download_filename, $headers));
        $download_filename = $resource->slug.$resource->attachment;
-       return response()->download(public_path('uploads/'.$resource->attachment, $download_filename));
+       return response()->download(asset('storage/resources/'.$resource->attachment, $download_filename));
    }
 
 }

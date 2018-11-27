@@ -270,7 +270,7 @@ class ResourceController extends Controller
 
             if($request->hasFile('attach')){
                 $file_name = time().'.'.$request->attach->extension();
-                $uploads = public_path('uploads/');
+                $uploads = asset('storage/resources/');
                 $request->attach->move($uploads, $file_name);
                 $resource->attachment = $file_name;
             }
@@ -387,7 +387,7 @@ class ResourceController extends Controller
                 if($check != null){
                     if($request->hasFile('attach')){
                         $file_name = time().'.'.$request->attach->extension();
-                        $uploads = public_path('uploads/');
+                        $uploads = asset('storage/resources/');
                         $request->attach->move($uploads, $file_name);
                     } else {
                         $file_name = $check->attachment;
