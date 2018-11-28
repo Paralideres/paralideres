@@ -270,8 +270,7 @@ class ResourceController extends Controller
 
             if($request->hasFile('attach')){
                 $file_name = time().'.'.$request->attach->extension();
-                $uploads = asset('storage/resources/');
-                $request->attach->move($uploads, $file_name);
+                $request->attach->storeAs('resources', $file_name, 'public');
                 $resource->attachment = $file_name;
             }
 

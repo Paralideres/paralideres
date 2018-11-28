@@ -11,6 +11,7 @@ use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ResourceController extends WebController
 {
@@ -69,18 +70,20 @@ class ResourceController extends WebController
 
     public function download(Request $request)
     {
-       $resource = Resource::where('slug', $request->segment('2'))->firstOrFail();
-       $resource_download = new ResourceDownload;
-       $resource_download->user_id = $this->auth->id;
-       $resource_download->resource_id = $resource->id;
-       $resource_download->save();
-//       $filename = 'resource.pdf';
-//       $download_filename = $resource->slug.'.pdf';
-//       file_put_contents(public_path('uploads/'.$filename), fopen($resource->attachment, 'r'));
-//       $headers = array('Content-Type: application/pdf',);
-//       return response()->download(public_path('uploads/'.$filename, $download_filename, $headers));
-       $download_filename = $resource->slug.$resource->attachment;
-       return response()->download(asset('storage/resources/'.$resource->attachment, $download_filename));
+        $resource = Resource::where('id', $request->segment('2'))->firstOrFail();
+        $file_path = 'resources/'.$resource->attachment;
+        $exists = Storage::disk('public')->exists($file_path);
+
+        if (!$exists) {
+            return response('File Not Found', 404);
+        }
+
+        $resource_download = new ResourceDownload;
+        $resource_download->user_id = $this->auth->id;
+        $resource_download->resource_id = $resource->id;
+        $resource_download->save();
+        $download_filename = $resource->slug.$resource->attachment;
+        return Storage::disk('public')->download($file_path, $download_filename);
    }
 
 }
